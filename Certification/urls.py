@@ -1,11 +1,12 @@
 from django.urls import path
-from .views import *
+from .views import ObserverViewSet, ServiceViewSet, CertifiedCompanyListViewSet
 
 
 urlpatterns = [
-    path('observer/', ObserverViewSet.as_view({'get': 'list'}), name='observer'),
-    path('service/', ServiceViewSet.as_view({'get': 'list'}), name='service'),
-    path('service/<int:pk>/', ServiceCompaniesView.as_view(), name='service-companies'),
-    path('certifiedcompany/', CertifiedCompanyListViewSet.as_view({'get': 'list'}), name='certificate-list'),
-    path('certifiedcompany/<int:pk>/', CertifiedCompanyDetailView.as_view(), name='certified-company-detail'),
+    path('observers/', ObserverViewSet.as_view({'get': 'list'}), name='observer-list'),
+    path('observers/<int:pk>/', ObserverViewSet.as_view({'get': 'retrieve'}), name='observer-detail'),
+    path('services/', ServiceViewSet.as_view({'get': 'list'}), name='service-list'),
+    path('services/<int:pk>/', ServiceViewSet.as_view({'get': 'retrieve'}), name='service-detail'),
+    path('certified-companies/', CertifiedCompanyListViewSet.as_view({'get': 'list'}), name='certified-company-list'),
+    path('certified-companies/<int:pk>/', CertifiedCompanyListViewSet.as_view({'get': 'retrieve'}), name='certified-company-detail'),
 ]

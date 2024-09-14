@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import *
+from .views import ProductBarCodeViewSet
 
 
 urlpatterns = [
-    path('code/', ProductBarCodeViewSet.as_view({'get': 'list'})),
-    path('code/<int:id>/', ProductBarCodeViewSet.as_view({'get': 'retrieve'})),
+    path('product-barcode/', ProductBarCodeViewSet.as_view({'get': 'list'}), name='product-barcode-list'),
+    path('product-barcode/<int:pk>/', ProductBarCodeViewSet.as_view({'get': 'retrieve'}), name='product-barcode-detail'),
 ]

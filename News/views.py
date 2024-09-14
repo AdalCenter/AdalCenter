@@ -5,30 +5,66 @@ from .serializers import *
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.http import JsonResponse
 from django.conf import settings
+from rest_framework.exceptions import APIException
+from rest_framework.response import Response
+from rest_framework import status
 
 
 class NewsViewSets(ModelViewSet):
-    queryset = News.objects.all().order_by('-date')  # Сортировка по дате (новости в порядке убывания)
+    """
+    API для управления новостями.
+
+    **GET /news/**: Получить список всех новостей.
+    **GET /news/{id}/**: Получить детальную информацию о конкретной новости по идентификатору.
+    """
+
+    queryset = News.objects.all().order_by('-date')
     serializer_class = NewsSerializer
     parser_classes = [MultiPartParser, FormParser]
 
-#    def retrieve(self, request, *args, **kwargs):
-#        instance = self.get_object()
-#        instance.view_count += 1
-#        instance.save()
-#        return super().retrieve(request, *args, **kwargs)
+    def list(self, request, *args, **kwargs):
+        """
+        Получить список всех новостей.
+        """
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception as e:
+            raise APIException(f'Ошибка получения списка новостей: {str(e)}')
+
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Получить детальную информацию о конкретной новости.
+        """
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception as e:
+            raise APIException(f'Ошибка получения детали новости: {str(e)}')
+
 
 class NewsPhotoViewSets(ModelViewSet):
+    """
+    API для управления фото новостей.
+
+    **GET /news-photos/**: Получить список всех фото новостей.
+    **GET /news-photos/{id}/**: Получить детальную информацию о конкретном фото новости.
+    """
+
     queryset = NewsPhoto.objects.all()
     serializer_class = NewsPhotoSerializer
     parser_classes = [MultiPartParser, FormParser]
 
+
 def adal_kg_parsing_videos(request):
+    """
+    Получить список видео с YouTube канала.
+
+    **GET /parse-videos/?channel_url={url}**: Извлечь видео с указанного канала.
+    """
     channel_url = request.GET.get('channel_url', f'https://www.youtube.com/@{settings.YT_ADAL_KG_CHANNEL}/videos')
 
     if not isinstance(channel_url, str):
-        return JsonResponse({'error': 'Invalid URL format'}, status=400)
-    
+        return JsonResponse({'error': 'Неверный формат URL'}, status=400)
+
     ydl_opts = {
         'quiet': True,
         'extract_flat': 'in_playlist',
@@ -41,7 +77,7 @@ def adal_kg_parsing_videos(request):
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(channel_url, download=False)
     except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+        return JsonResponse({'error': f'Ошибка при извлечении информации: {str(e)}'}, status=500)
 
     data = []
     for entry in info_dict.get('entries', []):

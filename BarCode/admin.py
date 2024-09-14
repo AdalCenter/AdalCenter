@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import *
+from .models import ProductBarCode
 
 
-admin.site.register(ProductBarCode)
+@admin.register(ProductBarCode)
+class ProductBarCodeAdmin(admin.ModelAdmin):
+    list_display = ('code', 'bar_type', 'product_status', 'company')
+    search_fields = ('code', 'bar_type', 'product_status')

@@ -7,33 +7,56 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact
         fields = '__all__'
 
-class LocateSerializer(serializers.ModelSerializer):
+
+class AddressSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Contact
+        model = Address
         fields = '__all__'
 
-class BlackListCompaniesSerializer(serializers.ModelSerializer):
+
+class PartnerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BlackListCompanies
+        model = Partner
         fields = '__all__'
 
-class CoordinateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Coordinate
-        fields = ['id', 'coordinate_title', 'x', 'y', 'url_title', 'url']
-
-class PartnersSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Partners
-        fields = '__all__'
-
-class FAQSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = FAQ
-        fields = '__all__'
 
 class AboutUsSerializer(serializers.ModelSerializer):
     class Meta:
         model = AboutUs
         fields = '__all__'
 
+
+class FAQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQ
+        fields = '__all__'
+
+
+class BlackListCompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BlackListCompany
+        fields = '__all__'
+
+
+class OurAchievementSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OurAchievement
+        fields = '__all__'
+
+
+class OurGoalsAndObjectivesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OurGoalsAndObjectives
+        fields = '__all__'
+
+
+class OurTeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OurTeam
+        fields = '__all__'
+
+
+class OurAchievementCertificateImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OurAchievementCertificateImage
+        fields = '__all__'

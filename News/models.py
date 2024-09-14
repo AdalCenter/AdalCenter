@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class News(models.Model):
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
     address = models.CharField(max_length=255, verbose_name='Адрес', default='')

@@ -3,6 +3,9 @@ from .models import *
 
 
 class ProductBarCodeSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для модели ProductBarCode.
+    """
     company_name = serializers.CharField(source='company.company_name')
     company_id = serializers.CharField(source='company.id')
 

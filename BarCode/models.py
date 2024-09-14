@@ -3,10 +3,13 @@ from Certification.models import *
 
 
 class ProductBarCode(models.Model):
-    code = models.CharField(max_length=13)
-    bar_type = models.CharField(max_length=6, choices=[('EAN_13', 'EAN_13'), ('UPC-A', 'UPC-A'), ('EAN-8', 'EAN-8'), ('UPC-E', 'UPC-E')])
-    product_status = models.CharField(max_length=42)
-    company = models.ForeignKey(CertifiedCompany, on_delete=models.CASCADE)
+    """
+    Модель для представления штрих-кода продукта.
+    """
+    code = models.CharField(max_length=13, verbose_name='Код продукта')
+    bar_type = models.CharField(max_length=6, choices=[('EAN_13', 'EAN_13'), ('UPC-A', 'UPC-A'), ('EAN-8', 'EAN-8'), ('UPC-E', 'UPC-E')], verbose_name='Тип кода продукта')
+    product_status = models.CharField(max_length=42, choices=[('Харам', 'Харам'), ('Халал', 'Халал'), ('Не проверено', 'Не проверено')], verbose_name='Статус продукта Адал/Харам/Не проверено')
+    company = models.ForeignKey(CertifiedCompany, on_delete=models.CASCADE, verbose_name='Компания')
 
     def __str__(self) -> str:
-        return f'{self.bar_type}: {self.code} - status: {self.product_status} - company ID: {self.company.company_name}'
+        return f'{self.bar_type}: {self.code} - статус: {self.product_status} - компания ID: {self.company.company_name}'
