@@ -3,7 +3,7 @@ from .views import *
 
 
 urlpatterns = [
-    path('parse-youtube-videos/', tez_kaber_parsing_videos, name='parse-youtube-videos'),
+    path('parse-youtube-videos/', tez_kabar_parsing_videos, name='parse-youtube-videos'),
     path('contacts/', ContactViewSet.as_view({'get': 'list'}), name='contact-list'),
     path('contacts/<int:pk>/', ContactViewSet.as_view({'get': 'retrieve'}), name='contact-detail'),
     path('addresses/', AddressViewSet.as_view({'get': 'list'}), name='address-list'),

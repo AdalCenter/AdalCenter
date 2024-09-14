@@ -5,6 +5,7 @@ from rest_framework import status
 from .serializers import *
 from .filters import *
 from .models import *
+from drf_yasg.utils import swagger_auto_schema
 
 
 class ProductBarCodeViewSet(viewsets.ModelViewSet):
@@ -16,6 +17,10 @@ class ProductBarCodeViewSet(viewsets.ModelViewSet):
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = ProductBarCodeFilter
 
+    @swagger_auto_schema(
+        operation_description="Получить список всех штрих-кодов продуктов.",
+        responses={200: ProductBarCodeSerializer(many=True)},
+    )
     def list(self, request, *args, **kwargs):
         """
         Получить список всех штрих-кодов продуктов.
@@ -25,6 +30,13 @@ class ProductBarCodeViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+    @swagger_auto_schema(
+        operation_description="Получить детали конкретного штрих-кода продукта.",
+        responses={
+            200: ProductBarCodeSerializer,
+            404: "Штрих-код не найден",
+        },
+    )
     def retrieve(self, request, *args, **kwargs):
         """
         Получить детали конкретного штрих-кода продукта.

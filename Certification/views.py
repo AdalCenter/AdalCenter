@@ -27,7 +27,10 @@ class ObserverViewSet(viewsets.ModelViewSet):
 
     @swagger_auto_schema(
         operation_description="Получение информации о конкретном наблюдателе.",
-        responses={200: ObserverSerializer, 404: openapi.Response('Наблюдатель не найден')},
+        responses={
+            200: ObserverSerializer,
+            404: openapi.Response('Наблюдатель не найден')
+        },
     )
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
@@ -36,6 +39,7 @@ class ObserverViewSet(viewsets.ModelViewSet):
         if isinstance(exc, exceptions.NotFound):
             return Response({'error': 'Наблюдатель не найден'}, status=status.HTTP_404_NOT_FOUND)
         return super().handle_exception(exc)
+
 
 class ServiceViewSet(viewsets.ModelViewSet):
     """
@@ -55,7 +59,10 @@ class ServiceViewSet(viewsets.ModelViewSet):
 
     @swagger_auto_schema(
         operation_description="Получение информации о конкретном сервисе.",
-        responses={200: ServiceSerializer, 404: openapi.Response('Сервис не найден')},
+        responses={
+            200: ServiceSerializer,
+            404: openapi.Response('Сервис не найден')
+        },
     )
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
@@ -64,6 +71,7 @@ class ServiceViewSet(viewsets.ModelViewSet):
         if isinstance(exc, exceptions.NotFound):
             return Response({'error': 'Сервис не найден'}, status=status.HTTP_404_NOT_FOUND)
         return super().handle_exception(exc)
+
 
 class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
     """
@@ -83,7 +91,10 @@ class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
 
     @swagger_auto_schema(
         operation_description="Получение информации о конкретной сертифицированной компании.",
-        responses={200: CertifiedCompanySerializer, 404: openapi.Response('Компания не найдена')},
+        responses={
+            200: CertifiedCompanyListSerializer,
+            404: openapi.Response('Компания не найдена')
+        },
     )
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
