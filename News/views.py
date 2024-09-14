@@ -26,7 +26,8 @@ class NewsViewSets(ModelViewSet):
     parser_classes = [MultiPartParser, FormParser]
 
     @swagger_auto_schema(
-        operation_description="Получить список всех новостей.",
+        operation_summary="Получить список всех новостей",
+        operation_description="Этот эндпоинт возвращает список всех новостей.",
         responses={200: NewsSerializer(many=True)},
     )
     def list(self, request, *args, **kwargs):
@@ -39,7 +40,8 @@ class NewsViewSets(ModelViewSet):
             raise APIException(f'Ошибка получения списка новостей: {str(e)}')
 
     @swagger_auto_schema(
-        operation_description="Получить детальную информацию о конкретной новости.",
+        operation_summary="Получить детальную информацию о новости",
+        operation_description="Этот эндпоинт возвращает детальную информацию о конкретной новости по идентификатору.",
         responses={
             200: NewsSerializer,
             404: openapi.Response('Новость не найдена')
@@ -68,33 +70,58 @@ class NewsPhotoViewSets(ModelViewSet):
     parser_classes = [MultiPartParser, FormParser]
 
     @swagger_auto_schema(
-        operation_description="Получить список всех фото новостей.",
+        operation_summary="Получить список всех фото новостей",
+        operation_description="Этот эндпоинт возвращает список всех фото новостей.",
         responses={200: NewsPhotoSerializer(many=True)},
     )
     def list(self, request, *args, **kwargs):
+        """
+        Получить список всех фото новостей.
+        """
         return super().list(request, *args, **kwargs)
 
     @swagger_auto_schema(
-        operation_description="Получить детальную информацию о конкретном фото новости.",
+        operation_summary="Получить детальную информацию о фото новости",
+        operation_description="Этот эндпоинт возвращает детальную информацию о конкретном фото новости по идентификатору.",
         responses={
             200: NewsPhotoSerializer,
             404: openapi.Response('Фото не найдено')
         },
     )
     def retrieve(self, request, *args, **kwargs):
+        """
+        Получить детальную информацию о конкретном фото новости.
+        """
         return super().retrieve(request, *args, **kwargs)
 
 
 @swagger_auto_schema(
     method='get',
-    operation_description="Получить список видео с YouTube канала.",
+    operation_summary="Получить список видео с YouTube канала",
+    operation_description="Этот эндпоинт позволяет извлечь видео с указанного YouTube канала. Используйте параметр `channel_url` для указания канала.",  # Подробное описание
     manual_parameters=[
         openapi.Parameter('channel_url', openapi.IN_QUERY, description="URL канала YouTube", type=openapi.TYPE_STRING)
     ],
     responses={
-        200: openapi.Response('Список видео', description='Список видео с канала'),
-        400: openapi.Response('Неверный формат URL'),
-        500: openapi.Response('Ошибка при извлечении информации')
+        200: openapi.Response(
+            'Список видео',
+            schema=openapi.Schema(
+                type=openapi.TYPE_ARRAY,
+                items=openapi.Items(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'Название': openapi.Schema(type=openapi.TYPE_STRING),
+                        'URL': openapi.Schema(type=openapi.TYPE_STRING),
+                        'Описание': openapi.Schema(type=openapi.TYPE_STRING),
+                        'Дата публикации': openapi.Schema(type=openapi.TYPE_STRING),
+                        'Фото превью': openapi.Schema(type=openapi.TYPE_STRING),
+                        'Просмотры': openapi.Schema(type=openapi.TYPE_INTEGER),
+                    }
+                )
+            )
+        ),
+        400: openapi.Response('Неверный формат URL', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={'error': openapi.Schema(type=openapi.TYPE_STRING)})),
+        500: openapi.Response('Ошибка при извлечении информации', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={'error': openapi.Schema(type=openapi.TYPE_STRING)})),
     },
 )
 @api_view(['GET'])

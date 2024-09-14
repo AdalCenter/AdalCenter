@@ -19,14 +19,16 @@ class ObserverViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        operation_description="Получение списка наблюдателей.",
+        operation_summary="Получить список наблюдателей",
+        operation_description="Этот эндпоинт позволяет получить список всех наблюдателей.",
         responses={200: ObserverSerializer(many=True)},
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
     @swagger_auto_schema(
-        operation_description="Получение информации о конкретном наблюдателе.",
+        operation_summary="Получить информацию о наблюдателе",
+        operation_description="Этот эндпоинт позволяет получить информацию о конкретном наблюдателе по его ID.",
         responses={
             200: ObserverSerializer,
             404: openapi.Response('Наблюдатель не найден')
@@ -51,14 +53,16 @@ class ServiceViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        operation_description="Получение списка сервисов.",
+        operation_summary="Получить список сервисов",
+        operation_description="Этот эндпоинт позволяет получить список всех сервисов.",
         responses={200: ServiceSerializer(many=True)},
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
     @swagger_auto_schema(
-        operation_description="Получение информации о конкретном сервисе.",
+        operation_summary="Получить информацию о сервисе",
+        operation_description="Этот эндпоинт позволяет получить информацию о конкретном сервисе по его ID.",
         responses={
             200: ServiceSerializer,
             404: openapi.Response('Сервис не найден')
@@ -83,14 +87,16 @@ class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(
-        operation_description="Получение списка сертифицированных компаний.",
+        operation_summary="Получить список сертифицированных компаний",
+        operation_description="Этот эндпоинт позволяет получить список всех сертифицированных компаний.",
         responses={200: CertifiedCompanyListSerializer(many=True)},
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
     @swagger_auto_schema(
-        operation_description="Получение информации о конкретной сертифицированной компании.",
+        operation_summary="Получить информацию о компании",
+        operation_description="Этот эндпоинт позволяет получить информацию о конкретной сертифицированной компании по ее ID.",
         responses={
             200: CertifiedCompanyListSerializer,
             404: openapi.Response('Компания не найдена')

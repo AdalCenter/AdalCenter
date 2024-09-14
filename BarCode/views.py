@@ -18,7 +18,8 @@ class ProductBarCodeViewSet(viewsets.ModelViewSet):
     filterset_class = ProductBarCodeFilter
 
     @swagger_auto_schema(
-        operation_description="Получить список всех штрих-кодов продуктов.",
+        operation_summary="Получить список всех штрих-кодов продуктов",
+        operation_description="Этот эндпоинт возвращает список всех штрих-кодов, доступных в системе.",
         responses={200: ProductBarCodeSerializer(many=True)},
     )
     def list(self, request, *args, **kwargs):
@@ -31,7 +32,8 @@ class ProductBarCodeViewSet(viewsets.ModelViewSet):
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @swagger_auto_schema(
-        operation_description="Получить детали конкретного штрих-кода продукта.",
+        operation_summary="Получить детали конкретного штрих-кода продукта",
+        operation_description="Этот эндпоинт возвращает детали конкретного штрих-кода продукта по его идентификатору.",
         responses={
             200: ProductBarCodeSerializer,
             404: "Штрих-код не найден",

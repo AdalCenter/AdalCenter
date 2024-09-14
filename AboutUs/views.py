@@ -384,15 +384,32 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
 @swagger_auto_schema(
     method='get',
-    operation_description="Парсинг видео с канала Tez Kabar.",
+    operation_summary="Парсинг видео с канала Tez Kabar",
+    operation_description="Этот эндпоинт позволяет извлечь видео с указанного YouTube канала Tez Kabar. Используйте параметр `channel_url` для указания канала.",
     manual_parameters=[
         openapi.Parameter('channel_url', openapi.IN_QUERY, description="URL канала YouTube", type=openapi.TYPE_STRING)
     ],
     responses={
-        200: openapi.Response('Список видео', description='Список видео с канала'),
-        400: openapi.Response('Неверный формат URL'),
-        404: openapi.Response('Видео не найдены'),
-        500: openapi.Response('Ошибка при извлечении информации')
+        200: openapi.Response(
+            'Список видео',
+            schema=openapi.Schema(
+                type=openapi.TYPE_ARRAY,
+                items=openapi.Items(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'Название': openapi.Schema(type=openapi.TYPE_STRING),
+                        'URL': openapi.Schema(type=openapi.TYPE_STRING),
+                        'Описание': openapi.Schema(type=openapi.TYPE_STRING),
+                        'Дата публикации': openapi.Schema(type=openapi.TYPE_STRING),
+                        'Фото превью': openapi.Schema(type=openapi.TYPE_STRING),
+                        'Просмотры': openapi.Schema(type=openapi.TYPE_INTEGER),
+                    }
+                )
+            )
+        ),
+        400: openapi.Response('Неверный формат URL', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={'error': openapi.Schema(type=openapi.TYPE_STRING)})),
+        404: openapi.Response('Видео не найдены', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={'error': openapi.Schema(type=openapi.TYPE_STRING)})),
+        500: openapi.Response('Ошибка при извлечении информации', schema=openapi.Schema(type=openapi.TYPE_OBJECT, properties={'error': openapi.Schema(type=openapi.TYPE_STRING)})),
     },
 )
 @api_view(['GET'])
