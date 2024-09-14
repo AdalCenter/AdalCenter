@@ -24,4 +24,6 @@ urlpatterns = [
     path('team/<int:pk>/', OurTeamViewSet.as_view({'get': 'retrieve'}), name='team-detail'),
     path('achievement-certificates/', OurAchievementCertificateImageViewSet.as_view({'get': 'list'}), name='achievement-certificates-list'),
     path('achievement-certificates/<int:pk>/', OurAchievementCertificateImageViewSet.as_view({'get': 'retrieve'}), name='achievement-certificates-detail'),
+    path('reviews/', ReviewViewSet.as_view({'get': 'list'}), name='reviews-list'),
+    path('reviews/<int:pk>/', ReviewViewSet.as_view({'get': 'retrieve'}), name='reviews-detail'),
 ]

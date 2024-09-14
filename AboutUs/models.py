@@ -85,3 +85,11 @@ class BlackListCompany(models.Model):
 
     def __str__(self) -> str:
         return self.title or 'Без заголовка'
+
+class Review(models.Model):
+    name = models.CharField(max_length=18, verbose_name='Имя')
+    stars = models.CharField(max_length=1, verbose_name='Кол-во звезд')
+    text = models.TextField(verbose_name='Содержимое отзыва')
+
+    def __str__(self) -> str:
+        return self.name

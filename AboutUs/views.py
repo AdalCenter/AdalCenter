@@ -8,6 +8,7 @@ import yt_dlp
 from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework.decorators import api_view
 
 
 class ContactViewSet(viewsets.ModelViewSet):
@@ -315,7 +316,6 @@ class OurTeamViewSet(viewsets.ModelViewSet):
         except Exception:
             return Response({'error': 'Ошибка получения члена команды'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class OurAchievementCertificateImageViewSet(viewsets.ModelViewSet):
     """
     API для управления изображениями сертификатов достижений.
@@ -349,7 +349,40 @@ class OurAchievementCertificateImageViewSet(viewsets.ModelViewSet):
         except Exception:
             return Response({'error': 'Ошибка получения изображения сертификата'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class ReviewViewSet(viewsets.ModelViewSet):
+    """
+    API для управления изображениями сертификатов достижений.
+    """
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
 
+    @swagger_auto_schema(
+        operation_summary="Получить список отзывов",
+        responses={
+            200: openapi.Response("Успешный ответ", ReviewSerializer(many=True)),
+            404: "Отзывы не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения отзывов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить отзыв по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", ReviewSerializer()),
+            404: "Отзыв не найдено"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения отзыва'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
 def tez_kaber_parsing_videos(request):
     """
     Парсинг видео с канала Tez Kabar.
