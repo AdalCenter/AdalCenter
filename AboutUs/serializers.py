@@ -27,9 +27,9 @@ class FAQSerializer(serializers.ModelSerializer):
         model = FAQ
         fields = '__all__'
 
-class BlackListCompanySerializer(serializers.ModelSerializer):
+class BoycottSerializer(serializers.ModelSerializer):
     class Meta:
-        model = BlackListCompany
+        model = Boycott
         fields = '__all__'
 
 class OurAchievementSerializer(serializers.ModelSerializer):
@@ -55,4 +55,24 @@ class OurAchievementCertificateImageSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
+        fields = '__all__'
+
+class ProcessOfObtainingCertificateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProcessOfObtainingCertificate
+        fields = '__all__'
+
+class OurIndicatorsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OurIndicators
+        fields = '__all__'
+
+class ClientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RatingAndHowYouHeardAboutOurSite
         fields = '__all__'

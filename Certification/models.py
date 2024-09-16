@@ -4,6 +4,7 @@ from django.core.files import File
 from io import BytesIO
 from django.conf import settings
 
+
 class Observer(models.Model):
     name = models.CharField(max_length=255, verbose_name="Имя")
     contact_number = models.CharField(max_length=50, verbose_name="Контактный номер")
@@ -14,8 +15,8 @@ class Observer(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Наблюдатели'
-        verbose_name_plural = 'Наблюдатель'
+        verbose_name = 'Наблюдатель'
+        verbose_name_plural = 'Наблюдатели'
 
 class Service(models.Model):
     photo = models.ImageField(upload_to='service-images/', verbose_name='Фото какого-то сервиса')
@@ -25,12 +26,12 @@ class Service(models.Model):
         return self.service
 
     class Meta:
-        verbose_name = 'Сервисы'
-        verbose_name_plural = 'Сервис'
+        verbose_name = 'Сервис'
+        verbose_name_plural = 'Сервисы'
 
 class CertifiedCompany(models.Model):
-    company_email = models.EmailField()
-    certificate_name = models.CharField(max_length=28)
+    company_email = models.EmailField(verbose_name='Электронная почта компании')
+    certificate_name = models.CharField(max_length=28, verbose_name='Название сертификата')
     company_photo = models.ImageField(upload_to='company_photos/', verbose_name="Фото компании (внутри или снаружи)")
     company_name = models.CharField(max_length=255, verbose_name="Название компании")
     trademark = models.CharField(max_length=255, verbose_name="Товарный знак")
@@ -75,5 +76,5 @@ class CertifiedCompany(models.Model):
         return self.company_name
 
     class Meta:
-        verbose_name = 'Сертифицированные компании'
-        verbose_name_plural = 'Сертифицированная компания'
+        verbose_name = 'Сертифицированная компания'
+        verbose_name_plural = 'Сертифицированные компании'

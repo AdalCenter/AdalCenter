@@ -13,13 +13,13 @@ from rest_framework.decorators import api_view
 
 class ContactViewSet(viewsets.ModelViewSet):
     """
-    API для управления контактами.
+    API для управления контактами (Футер).
     """
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
 
     @swagger_auto_schema(
-        operation_summary="Получить список контактов",
+        operation_summary="Получить список контактов (Футер)",
         responses={
             200: openapi.Response("Успешный ответ", ContactSerializer(many=True)),
             404: "Контакты не найдены"
@@ -32,7 +32,7 @@ class ContactViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Ошибка получения контактов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @swagger_auto_schema(
-        operation_summary="Получить контакт по ID",
+        operation_summary="Получить контакт по ID (Футер)",
         responses={
             200: openapi.Response("Успешный ответ", ContactSerializer()),
             404: "Контакт не найден"
@@ -47,13 +47,13 @@ class ContactViewSet(viewsets.ModelViewSet):
 
 class AddressViewSet(viewsets.ModelViewSet):
     """
-    API для управления адресами.
+    API для управления адресами (Футер).
     """
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
 
     @swagger_auto_schema(
-        operation_summary="Получить список адресов",
+        operation_summary="Получить список адресов (Футер)",
         responses={
             200: openapi.Response("Успешный ответ", AddressSerializer(many=True)),
             404: "Адреса не найдены"
@@ -66,7 +66,7 @@ class AddressViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Ошибка получения адресов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @swagger_auto_schema(
-        operation_summary="Получить адрес по ID",
+        operation_summary="Получить адрес по ID (Футер)",
         responses={
             200: openapi.Response("Успешный ответ", AddressSerializer()),
             404: "Адрес не найден"
@@ -181,17 +181,17 @@ class FAQViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Ошибка получения вопроса'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class BlackListCompanyViewSet(viewsets.ModelViewSet):
+class BoycottViewSet(viewsets.ModelViewSet):
     """
     API для управления черным списком компаний.
     """
-    queryset = BlackListCompany.objects.all()
-    serializer_class = BlackListCompanySerializer
+    queryset = Boycott.objects.all()
+    serializer_class = BoycottSerializer
 
     @swagger_auto_schema(
         operation_summary="Получить список черного списка компаний",
         responses={
-            200: openapi.Response("Успешный ответ", BlackListCompanySerializer(many=True)),
+            200: openapi.Response("Успешный ответ", BoycottSerializer(many=True)),
             404: "Компании не найдены"
         }
     )
@@ -204,7 +204,7 @@ class BlackListCompanyViewSet(viewsets.ModelViewSet):
     @swagger_auto_schema(
         operation_summary="Получить компанию из черного списка по ID",
         responses={
-            200: openapi.Response("Успешный ответ", BlackListCompanySerializer()),
+            200: openapi.Response("Успешный ответ", BoycottSerializer()),
             404: "Компания не найдена"
         }
     )
@@ -457,3 +457,150 @@ def tez_kabar_parsing_videos(request):
         })
 
     return JsonResponse(data, safe=False, json_dumps_params={'ensure_ascii': False, 'indent': 4})
+
+class ProcessOfObtainingCertificateViewSet(viewsets.ModelViewSet):
+    """
+    API для управления процессом получения сертификата.
+    """
+    queryset = ProcessOfObtainingCertificate.objects.all()
+    serializer_class = ProcessOfObtainingCertificateSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Получить список этапов получения сертификата",
+        responses={
+            200: openapi.Response("Успешный ответ", ProcessOfObtainingCertificateSerializer(many=True)),
+            404: "Этап получения сертификата не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения этапов получения сертификата'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить этап получения сертификата по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", ProcessOfObtainingCertificateSerializer()),
+            404: "Этап получения сертификата не найдено"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения этапа получения сертификата'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class OurIndicatorsViewSet(viewsets.ModelViewSet):
+    """
+    API для управления показателями.
+    """
+    queryset = OurIndicators.objects.all()
+    serializer_class = OurIndicatorsSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Получить список показателей",
+        responses={
+            200: openapi.Response("Успешный ответ", OurIndicatorsSerializer(many=True)),
+            404: "Показатель не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения показателей'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить показатель по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", OurIndicatorsSerializer()),
+            404: "Показатель не найдено"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения показателя'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class ClientViewSet(viewsets.ModelViewSet):
+    """
+    API для управления клиентами.
+    """
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Получить список клиентов",
+        responses={
+            200: openapi.Response("Успешный ответ", ClientSerializer(many=True)),
+            404: "Клиент не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения клиентов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить клиента по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", ClientSerializer()),
+            404: "Клиент не найден"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения клиента'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class RatingViewSet(viewsets.ModelViewSet):
+    """
+    API для управления рейтингами и источниками информации о сайте.
+    """
+    queryset = RatingAndHowYouHeardAboutOurSite.objects.all()
+    serializer_class = RatingSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Создать новый рейтинг",
+        request_body=RatingSerializer,
+        responses={
+            201: openapi.Response("Успешно создано", RatingSerializer()),
+            400: "Некорректные данные",
+            500: "Ошибка сервера"
+        }
+    )
+    def create(self, request, *args, **kwargs):
+        try:
+            return super().create(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка создания рейтинга'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить список рейтингов",
+        responses={
+            200: openapi.Response("Успешный ответ", RatingSerializer(many=True)),
+            404: "Рейтинги не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения рейтингов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить рейтинг по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", RatingSerializer()),
+            404: "Рейтинг не найден"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения рейтинга'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

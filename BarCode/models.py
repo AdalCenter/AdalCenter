@@ -13,3 +13,8 @@ class ProductBarCode(models.Model):
 
     def __str__(self) -> str:
         return f'{self.bar_type}: {self.code} - статус: {self.product_status} - компания ID: {self.company.company_name}'
+    
+    class Meta:
+        verbose_name = 'Штрих код'
+        verbose_name_plural = 'Штрих коды'
+
