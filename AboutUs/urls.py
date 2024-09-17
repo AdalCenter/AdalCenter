@@ -36,4 +36,8 @@ urlpatterns = [
     path('ratings/<int:pk>/', RatingViewSet.as_view({'get': 'retrieve'}), name='rating-detail'),
     path('main-phone-number/', MainPhoneNumberViewSet.as_view({'get': 'list'}), name='main-phone-number-list'),
     path('main-phone-number/<int:pk>/', MainPhoneNumberViewSet.as_view({'get': 'retrieve'}), name='main-phone-number-detail'),
+    path('footer-our-sites/', OurSitesViewSet.as_view({'get': 'list'}), name='our-sites-list'),
+    path('footer-our-sites/<int:pk>/', OurSitesViewSet.as_view({'get': 'retrieve'}), name='our-sites-detail'),
+    path('footer-social-network-sites/', SocialNetworkViewSet.as_view({'get': 'list'}), name='our-social-network-list'),
+    path('footer-social-network-sites/<int:pk>/', SocialNetworkViewSet.as_view({'get': 'retrieve'}), name='our-social-network-detail'),
 ]

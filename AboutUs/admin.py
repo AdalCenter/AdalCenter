@@ -63,3 +63,4 @@ class RatingAndHowYouHeardAboutOurSiteAdmin(admin.ModelAdmin):
     list_display = ('stars', 'social_network')
 
 admin.site.register(MainPhoneNumber)
+admin.site.register(OurSites)

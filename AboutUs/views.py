@@ -428,6 +428,9 @@ def tez_kabar_parsing_videos(request):
         'playlist_items': '1-50',
         'skip_download': True,
         'force_generic_extractor': True,
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36',
+        },
     }
 
     try:
@@ -637,3 +640,69 @@ class MainPhoneNumberViewSet(viewsets.ModelViewSet):
             return super().retrieve(request, *args, **kwargs)
         except Exception:
             return Response({'error': 'Ошибка получения номера'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class OurSitesViewSet(viewsets.ModelViewSet):
+    """
+    API для управления сайтом.
+    """
+    queryset = OurSites.objects.all()
+    serializer_class = OurSitesSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Получить список сайтов",
+        responses={
+            200: openapi.Response("Успешный ответ", OurSitesSerializer(many=True)),
+            404: "Сайты не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения сайтов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить сайт по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", OurSitesSerializer()),
+            404: "Сайт не найден"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения сайта'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class SocialNetworkViewSet(viewsets.ModelViewSet):
+    """
+    API для управления социальной сети.
+    """
+    queryset = SocialNetwork.objects.all()
+    serializer_class = SocialNetworkSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Получить список социальных сетей",
+        responses={
+            200: openapi.Response("Успешный ответ", SocialNetworkSerializer(many=True)),
+            404: "Социальные сети не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения социальных сетей'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить социальную сеть по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", SocialNetworkSerializer()),
+            404: "Социальная сеть не найдена"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения социальной сети'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

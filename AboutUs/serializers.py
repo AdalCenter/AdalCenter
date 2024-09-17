@@ -81,3 +81,13 @@ class MainPhoneNumberSerializer(serializers.ModelSerializer):
     class Meta:
         model = MainPhoneNumber
         fields = '__all__'
+
+class OurSitesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OurSites
+        fields = '__all__'
+
+class SocialNetworkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SocialNetwork
+        fields = '__all__'

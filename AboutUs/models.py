@@ -184,7 +184,6 @@ class RatingAndHowYouHeardAboutOurSite(models.Model):
         verbose_name = 'Оценка и рейтинг'
         verbose_name_plural = 'Оценки и рейтинг'
 
-
 class SocialNetwork(models.Model):
     icon = models.ImageField(upload_to='SocialNetworkIcon/', verbose_name='Иконка социальной сети')
     url = models.TextField(verbose_name='Ссылка на социальную сеть')
@@ -205,3 +204,15 @@ class MainPhoneNumber(models.Model):
     class Meta:
         verbose_name = 'Номер в главном'
         verbose_name_plural = 'Номер в главном'
+
+class OurSites(models.Model):
+    icon = models.ImageField(upload_to='OurSitesIcon/', verbose_name='Иконка сайта')
+    site_name = models.CharField(max_length=18, verbose_name='Название сайта')
+    site_url = models.URLField(max_length=9, verbose_name='URL сайта')
+
+    def __str__(self) -> str:
+        return self.site_name
+
+    class Meta:
+        verbose_name = 'Наш сайт'
+        verbose_name_plural = 'Наши сайты'

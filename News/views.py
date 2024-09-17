@@ -94,11 +94,10 @@ class NewsPhotoViewSets(ModelViewSet):
         """
         return super().retrieve(request, *args, **kwargs)
 
-
 @swagger_auto_schema(
     method='get',
     operation_summary="Получить список видео с YouTube канала",
-    operation_description="Этот эндпоинт позволяет извлечь видео с указанного YouTube канала. Используйте параметр `channel_url` для указания канала.",  # Подробное описание
+    operation_description="Этот эндпоинт позволяет извлечь видео с указанного YouTube канала. Используйте параметр `channel_url` для указания канала.",
     manual_parameters=[
         openapi.Parameter('channel_url', openapi.IN_QUERY, description="URL канала YouTube", type=openapi.TYPE_STRING)
     ],
@@ -142,6 +141,9 @@ def adal_kg_parsing_videos(request):
         'playlist_items': '1-50',
         'skip_download': True,
         'force_generic_extractor': True,
+        'http_headers': {
+            'User-Agent': 'Your Custom User Agent String',
+        },
     }
 
     try:
