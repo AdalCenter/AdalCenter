@@ -91,3 +91,13 @@ class SocialNetworkSerializer(serializers.ModelSerializer):
     class Meta:
         model = SocialNetwork
         fields = '__all__'
+
+class MobileAppUrlSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MobileAppUrl
+        fields = '__all__'
+
+class SuggestionsOrComplaintsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SuggestionsOrComplaints
+        fields = '__all__'

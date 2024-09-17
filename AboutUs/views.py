@@ -706,3 +706,69 @@ class SocialNetworkViewSet(viewsets.ModelViewSet):
             return super().retrieve(request, *args, **kwargs)
         except Exception:
             return Response({'error': 'Ошибка получения социальной сети'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class MobileAppUrlViewSet(viewsets.ModelViewSet):
+    """
+    API для управления ссылками на мобильное приложение.
+    """
+    queryset = MobileAppUrl.objects.all()
+    serializer_class = MobileAppUrlSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Получить список ссылок на мобильное приложение",
+        responses={
+            200: openapi.Response("Успешный ответ", MobileAppUrlSerializer(many=True)),
+            404: "Ссылки на мобильное приложение не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения ссылок на мобильное приложение'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить ссылки на мобильное приложение по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", MobileAppUrlSerializer()),
+            404: "Ссылки на мобильное приложениене найдена"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения ссылки на мобильное приложение'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class SuggestionsOrComplaintsViewSet(viewsets.ModelViewSet):
+    """
+    API для управления ссылками на WhatsApp и Telegram для жалоб и предложений.
+    """
+    queryset = SuggestionsOrComplaints.objects.all()
+    serializer_class = SuggestionsOrComplaintsSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Получить список ссылок на WhatsApp и Telegram для жалоб и предложений",
+        responses={
+            200: openapi.Response("Успешный ответ", SuggestionsOrComplaintsSerializer(many=True)),
+            404: "Ссылки на WhatsApp и Telegram для жалоб и предложений не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения ссылок на WhatsApp и Telegram для жалоб и предложений'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить ссылки на WhatsApp и Telegram для жалоб и предложений по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", SuggestionsOrComplaintsSerializer()),
+            404: "WhatsApp и Telegram для жалоб и предложений найдена"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения ссылки на WhatsApp и Telegram для жалоб и предложений'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

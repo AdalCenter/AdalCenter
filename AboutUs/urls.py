@@ -40,4 +40,8 @@ urlpatterns = [
     path('footer-our-sites/<int:pk>/', OurSitesViewSet.as_view({'get': 'retrieve'}), name='our-sites-detail'),
     path('footer-social-network-sites/', SocialNetworkViewSet.as_view({'get': 'list'}), name='our-social-network-list'),
     path('footer-social-network-sites/<int:pk>/', SocialNetworkViewSet.as_view({'get': 'retrieve'}), name='our-social-network-detail'),
+    path('mobile-app-url/', MobileAppUrlViewSet.as_view({'get': 'list'}), name='mobile-app-url-list'),
+    path('mobile-app-url/<int:pk>/', MobileAppUrlViewSet.as_view({'get': 'retrieve'}), name='mobile-app-url-detail'),
+    path('suggestions-or-complaints/', SuggestionsOrComplaintsViewSet.as_view({'get': 'list'}), name='suggestions-or-complaints-list'),
+    path('suggestions-or-complaints/<int:pk>/', SuggestionsOrComplaintsViewSet.as_view({'get': 'retrieve'}), name='suggestions-or-complaints-detail'),
 ]

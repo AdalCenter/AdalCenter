@@ -216,3 +216,28 @@ class OurSites(models.Model):
     class Meta:
         verbose_name = 'Наш сайт'
         verbose_name_plural = 'Наши сайты'
+
+class MobileAppUrl(models.Model):
+    qr_code = models.ImageField(upload_to='QrCodeOurApp/', verbose_name='Qr-код на мобильного приложения ')
+    google_play = models.URLField(verbose_name='GooglePlayUrl')
+    app_store = models.URLField(verbose_name='AppStoreUrl')
+
+    def __str__(self) -> str:
+        return self.qr_code.url
+
+    class Meta:
+        verbose_name = 'Ссылка на наше мобильное приложение'
+        verbose_name_plural = 'Ссылки на наши мобильные приложение'
+
+class SuggestionsOrComplaints(models.Model):
+    telegram_qr_code = models.ImageField(upload_to='SuggestionsOrComplaintsTelegramQrCode/', verbose_name='Qr-код для жалоб и предложений Telegram')
+    whatsapp_qr_code = models.ImageField(upload_to='SuggestionsOrComplaintsWhatsAppQrCode/', verbose_name='Qr-код для жалоб и предложений WhatsApp')
+    whatsapp_url = models.URLField(verbose_name='URL для жалоб и предложений WhatsApp')
+    telegram_url = models.URLField(verbose_name='URL для жалоб и предложений WhatsApp')
+
+    def __str__(self) -> str:
+        return f"WhatsApp: {self.whatsapp_url} - Telegram: {self.telegram_url}"
+
+    class Meta:
+        verbose_name = 'WhatsApp и Telegram для жалоб и предложений'
+        verbose_name_plural = 'WhatsApp и Telegram для жалоб и предложений'

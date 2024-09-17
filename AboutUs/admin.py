@@ -52,7 +52,7 @@ class ReviewAdmin(admin.ModelAdmin):
 
 @admin.register(ProcessOfObtainingCertificate)
 class ProcessOfObtainingCertificateAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'icon', 'backgrount_image')
+    list_display = ('title', 'description', 'icon', 'background_image')
 
 @admin.register(OurIndicators)
 class OurIndicatorsAdmin(admin.ModelAdmin):
@@ -64,3 +64,5 @@ class RatingAndHowYouHeardAboutOurSiteAdmin(admin.ModelAdmin):
 
 admin.site.register(MainPhoneNumber)
 admin.site.register(OurSites)
+admin.site.register(SuggestionsOrComplaints)
+admin.site.register(MobileAppUrl)
