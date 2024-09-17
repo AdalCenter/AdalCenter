@@ -174,15 +174,15 @@ class OurIndicators(models.Model):
 
 
 class RatingAndHowYouHeardAboutOurSite(models.Model):
-    stars = models.CharField(max_length=1, verbose_name='Оценка в звездах')
+    stars = models.PositiveSmallIntegerField(default=0, verbose_name='Оценка в звездах')
     social_network = models.CharField(max_length=9, verbose_name='Социальная сеть')
 
     def __str__(self) -> str:
         return f"{self.social_network} - {self.stars}"
 
     class Meta:
-        verbose_name = 'Оценка и отзывы'
-        verbose_name_plural = 'Оценки и отзывы'
+        verbose_name = 'Оценка и рейтинг'
+        verbose_name_plural = 'Оценки и рейтинг'
 
 
 class SocialNetwork(models.Model):
