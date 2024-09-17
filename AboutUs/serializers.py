@@ -76,3 +76,8 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = RatingAndHowYouHeardAboutOurSite
         fields = '__all__'
+
+class MainPhoneNumberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MainPhoneNumber
+        fields = '__all__'

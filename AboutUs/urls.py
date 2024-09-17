@@ -32,6 +32,8 @@ urlpatterns = [
     path('our-indicators/<int:pk>/', OurIndicatorsViewSet.as_view({'get': 'retrieve'}), name='our-indicators-detail'),
     path('client/', ClientViewSet.as_view({'get': 'list'}), name='client-list'),
     path('client/<int:pk>/', ClientViewSet.as_view({'get': 'retrieve'}), name='client-detail'),
-    path('ratings/', RatingViewSet.as_view({'get': 'list'}), name='rating-list'),
-    path('ratings/<int:pk>/', RatingViewSet.as_view({'get': 'retrieve', 'post':'create'}), name='rating-detail'),
+    path('ratings/', RatingViewSet.as_view({'get': 'list', 'post':'create'}), name='rating-list'),
+    path('ratings/<int:pk>/', RatingViewSet.as_view({'get': 'retrieve'}), name='rating-detail'),
+    path('main-phone-number/', MainPhoneNumberViewSet.as_view({'get': 'list'}), name='main-phone-number-list'),
+    path('main-phone-number/<int:pk>/', MainPhoneNumberViewSet.as_view({'get': 'retrieve'}), name='main-phone-number-detail'),
 ]

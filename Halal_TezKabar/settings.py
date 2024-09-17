@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'BarCode',
     'drf_yasg',
     'News',
+    'ECode',
 ]
 
 # Middleware

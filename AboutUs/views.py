@@ -604,3 +604,36 @@ class RatingViewSet(viewsets.ModelViewSet):
             return super().retrieve(request, *args, **kwargs)
         except Exception:
             return Response({'error': 'Ошибка получения рейтинга'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class MainPhoneNumberViewSet(viewsets.ModelViewSet):
+    """
+    API для управления Номером в главном меню.
+    """
+    queryset = MainPhoneNumber.objects.all()
+    serializer_class = MainPhoneNumberSerializer
+
+    @swagger_auto_schema(
+        operation_summary="Получить список номеров в главном меню",
+        responses={
+            200: openapi.Response("Успешный ответ", MainPhoneNumberSerializer(many=True)),
+            404: "Номера не найдены"
+        }
+    )
+    def list(self, request, *args, **kwargs):
+        try:
+            return super().list(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения номеров'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @swagger_auto_schema(
+        operation_summary="Получить номер по ID",
+        responses={
+            200: openapi.Response("Успешный ответ", MainPhoneNumberSerializer()),
+            404: "Номер не найден"
+        }
+    )
+    def retrieve(self, request, *args, **kwargs):
+        try:
+            return super().retrieve(request, *args, **kwargs)
+        except Exception:
+            return Response({'error': 'Ошибка получения номера'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

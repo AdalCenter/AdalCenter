@@ -195,3 +195,13 @@ class SocialNetwork(models.Model):
     class Meta:
         verbose_name = 'Социальная сеть'
         verbose_name_plural = 'Социальные сети'
+
+class MainPhoneNumber(models.Model):
+    number = models.CharField(max_length=9, verbose_name='Номер телефона')
+
+    def __str__(self) -> str:
+        return self.number
+
+    class Meta:
+        verbose_name = 'Номер в главном'
+        verbose_name_plural = 'Номер в главном'
