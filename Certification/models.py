@@ -42,13 +42,13 @@ class CertifiedCompany(models.Model):
     company_address = models.TextField(verbose_name="Адрес компании")
     certificate_photo = models.ImageField(upload_to='certificate_photos/', verbose_name="Фото сертификата")
     qr_code = models.ImageField(upload_to='qr_codes/', verbose_name="QR-код", blank=True, null=True)
-    issue_date = models.DateField(auto_created=True, verbose_name="День получения")
-    expiration_date = models.DateField(auto_created=True, verbose_name="Дата окончания")
+    issue_date = models.DateField(auto_now_add=True, verbose_name="День получения")
+    expiration_date = models.DateField(verbose_name="Дата окончания")
     
     CERTIFICATE_TYPE_CHOICES = [
         ('Сертифицированный', 'Сертифицированный'),
         ('В процессе', 'В процессе'),
-        ('Приостановлено', 'Приостоновлено'),
+        ('Приостановлено', 'Приостановлено'),
         ('Истекшие', 'Истекшие')
     ]
     
@@ -68,7 +68,9 @@ class CertifiedCompany(models.Model):
             img = qr.make_image(fill='black', back_color='white')
             buffer = BytesIO()
             img.save(buffer, format="PNG")
+            buffer.seek(0)
             self.qr_code.save(f'qr_{self.pk}.png', File(buffer), save=False)
+            buffer.close()
 
         super().save(*args, **kwargs)
 

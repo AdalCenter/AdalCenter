@@ -17,7 +17,7 @@ class News(models.Model):
 
 class NewsPhoto(models.Model):
     news = models.ForeignKey(News, on_delete=models.CASCADE, verbose_name='Новости', related_name='photos')
-    photo = models.ImageField(upload_to='NewsImages/', verbose_name='Фото')
+    photo = models.ImageField(upload_to='news_images/%Y/%m/%d/', verbose_name='Фото')
 
     def __str__(self):
         return f"{self.news.title} - {self.photo.url}"

@@ -120,6 +120,9 @@ REST_FRAMEWORK = {
 YT_ADAL_KG_CHANNEL = env('YT_ADAL_KG_CHANNEL', default='tezkabar1')
 YT_TEZ_KABAR_CHANNEL = env('YT_TEZ_KABAR_CHANNEL', default='tezkabar1')
 
+# Домен сайта
+SITE_DOMEN = 'www.adalcenter.kg'
+
 # Настройки CORS
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True

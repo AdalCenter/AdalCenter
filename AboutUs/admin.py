@@ -44,7 +44,7 @@ class FAQAdmin(admin.ModelAdmin):
 
 @admin.register(Boycott)
 class BoycottAdmin(admin.ModelAdmin):
-    list_display = ('company_logo')
+    list_display = ('company_logo',)
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
