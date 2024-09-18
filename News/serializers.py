@@ -13,15 +13,17 @@ class NewsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = News
-        fields = ['id', 'date', 'address', 'title', 'subtitle', 'description', 'images']
+        fields = ['id', 'latest_update_date', 'create_date', 'address', 'title', 'main_photo', 'subtitle', 'description', 'images']
         extra_kwargs = {
             'id': {'help_text': 'Уникальный идентификатор новости'},
-            'date': {'help_text': 'Дата создания новости'},
             'address': {'help_text': 'Адрес, связанный с новостью'},
             'title': {'help_text': 'Заголовок новости'},
             'subtitle': {'help_text': 'Подзаголовок новости'},
             'description': {'help_text': 'Полное описание новости'},
             'images': {'help_text': 'Список изображений, связанных с новостью'},
+            'main_photo': {'help_text': 'Главное фото новости'},
+            'latest_update_date': {'help_text': 'Дата последнего обновления новости'},
+            'create_date': {'help_text': 'Дата создания новости'},
         }
 
     def get_images(self, obj):

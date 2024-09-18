@@ -9,7 +9,6 @@ class Observer(models.Model):
     name = models.CharField(max_length=255, verbose_name="Имя")
     contact_number = models.CharField(max_length=50, verbose_name="Контактный номер")
     address = models.TextField(verbose_name="Адрес")
-    certificate_duration = models.CharField(max_length=50, verbose_name="Срок сертификата")
 
     def __str__(self):
         return self.name
@@ -42,9 +41,9 @@ class CertifiedCompany(models.Model):
     company_address = models.TextField(verbose_name="Адрес компании")
     certificate_photo = models.ImageField(upload_to='certificate_photos/', verbose_name="Фото сертификата")
     qr_code = models.ImageField(upload_to='qr_codes/', verbose_name="QR-код", blank=True, null=True)
-    issue_date = models.DateField(auto_now_add=True, verbose_name="День получения")
-    expiration_date = models.DateField(verbose_name="Дата окончания")
-    
+    issue_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата и время получения сертификата")
+    expiration_date = models.DateTimeField(verbose_name="Дата и время окончания сертификата")
+
     CERTIFICATE_TYPE_CHOICES = [
         ('Сертифицированный', 'Сертифицированный'),
         ('В процессе', 'В процессе'),
@@ -56,7 +55,7 @@ class CertifiedCompany(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.qr_code and self.certificate_photo:
-            download_url = f'https://{settings.SITE_DOMEN}.com{self.certificate_photo.url}'
+            download_url = f'https://{settings.SITE_DOMEN}{self.certificate_photo.url}'
             qr = qrcode.QRCode(
                 version=1,
                 error_correction=qrcode.constants.ERROR_CORRECT_L,
