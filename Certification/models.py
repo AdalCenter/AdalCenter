@@ -43,15 +43,7 @@ class CertifiedCompany(models.Model):
     qr_code = models.ImageField(upload_to='qr_codes/', verbose_name="QR-код", blank=True, null=True)
     issue_date = models.DateTimeField(verbose_name="Дата и время получения сертификата")
     expiration_date = models.DateTimeField(verbose_name="Дата и время окончания сертификата")
-
-    CERTIFICATE_TYPE_CHOICES = [
-        ('Сертифицированный', 'Сертифицированный'),
-        ('В процессе', 'В процессе'),
-        ('Приостановлено', 'Приостановлено'),
-        ('Истекшие', 'Истекшие')
-    ]
-    
-    certificate_type = models.CharField(max_length=50, choices=CERTIFICATE_TYPE_CHOICES, default='В процессе', verbose_name="Тип сертификата")
+    certificate_type = models.CharField(max_length=50, choices=[('Сертифицированный', 'Сертифицированный'), ('В процессе', 'В процессе'), ('Приостановлено', 'Приостановлено'), ('Истекшие', 'Истекшие')], default='В процессе', verbose_name="Тип сертификата")
 
     def save(self, *args, **kwargs):
         if not self.qr_code and self.certificate_photo:
