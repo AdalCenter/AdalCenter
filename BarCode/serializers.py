@@ -11,4 +11,4 @@ class ProductBarCodeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductBarCode
-        fields = ['id', 'code', 'bar_type', 'product_status', 'company_name', 'company_certificate_type']
+        fields = ['id', 'code', 'bar_type', 'product_status', 'company_name', 'company_certificate_type', 'adal_center_icon']

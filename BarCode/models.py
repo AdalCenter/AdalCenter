@@ -18,6 +18,7 @@ class ProductBarCode(models.Model):
         verbose_name='Статус продукта Адал/Харам/Не проверено'
     )
     company = models.ForeignKey(CertifiedCompany, on_delete=models.CASCADE, verbose_name='Компания')
+    adal_center_icon = models.ImageField(upload_to='AdalCenterIcon/', verbose_name='Иконка сертифицированной компании Adal Center')
 
     def __str__(self) -> str:
         return f'{self.bar_type}: {self.code} - статус: {self.product_status} - компания: {self.company.company_name}'
