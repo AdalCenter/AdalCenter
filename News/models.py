@@ -8,7 +8,7 @@ class News(models.Model):
     title = models.CharField(max_length=255, verbose_name='Заголовок')
     subtitle = models.CharField(max_length=255, verbose_name='Подзаголовок', blank=True, null=True)
     description = models.TextField(verbose_name='Описание', default='')
-    main_photo = models.ImageField(upload_to='NewsMainImage/%Y/%m/%d/', verbose_name='Фото')
+    main_photo = models.ImageField(upload_to='NewsMainImage/%Y/%m/%d/', verbose_name='Главное фото новости')
 
     def __str__(self):
         return self.title

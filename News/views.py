@@ -6,8 +6,6 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from django.http import JsonResponse
 from django.conf import settings
 from rest_framework.exceptions import APIException
-from rest_framework.response import Response
-from rest_framework import status
 from rest_framework.decorators import api_view
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
@@ -142,7 +140,7 @@ def adal_kg_parsing_videos(request):
         'skip_download': True,
         'force_generic_extractor': True,
         'http_headers': {
-            'User-Agent': 'Your Custom User Agent String',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36',
         },
     }
 

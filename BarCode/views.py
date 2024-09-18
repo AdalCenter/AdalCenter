@@ -1,11 +1,11 @@
 from django_filters import rest_framework as filters
-from rest_framework import viewsets
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.response import Response
+from rest_framework import viewsets
 from rest_framework import status
 from .serializers import *
 from .filters import *
 from .models import *
-from drf_yasg.utils import swagger_auto_schema
 
 
 class ProductBarCodeViewSet(viewsets.ModelViewSet):

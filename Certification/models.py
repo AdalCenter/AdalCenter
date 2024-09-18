@@ -41,7 +41,7 @@ class CertifiedCompany(models.Model):
     company_address = models.TextField(verbose_name="Адрес компании")
     certificate_photo = models.ImageField(upload_to='certificate_photos/', verbose_name="Фото сертификата")
     qr_code = models.ImageField(upload_to='qr_codes/', verbose_name="QR-код", blank=True, null=True)
-    issue_date = models.DateTimeField(auto_now_add=True, verbose_name="Дата и время получения сертификата")
+    issue_date = models.DateTimeField(verbose_name="Дата и время получения сертификата")
     expiration_date = models.DateTimeField(verbose_name="Дата и время окончания сертификата")
 
     CERTIFICATE_TYPE_CHOICES = [
