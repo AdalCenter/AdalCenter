@@ -21,7 +21,7 @@ class NewsViewSets(ModelViewSet):
     **GET /news/{id}/**: Получить детальную информацию о конкретной новости по идентификатору.
     """
 
-    queryset = News.objects.all().order_by('-date')
+    queryset = News.objects.all().order_by('-create_date')
     serializer_class = NewsSerializer
     parser_classes = [MultiPartParser, FormParser]
 
