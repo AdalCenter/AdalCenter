@@ -2,11 +2,11 @@ import django_filters
 from .models import *
 
 class CertifiedCompanyFilter(django_filters.FilterSet):
-    company_name = django_filters.CharFilter(field_name='company_name', lookup_expr='icontains')
-    region = django_filters.CharFilter(field_name='region', lookup_expr='icontains')
-    service_type = django_filters.ModelChoiceFilter(queryset=Service.objects.all())
-    observer = django_filters.ModelChoiceFilter(queryset=Observer.objects.all())
-    certificate_type = django_filters.ChoiceFilter(choices=CertifiedCompany.CERTIFICATE_TYPE_CHOICES)
+    company_name = django_filters.CharFilter(field_name='company_name', lookup_expr='exact', label='Название компании')
+    region = django_filters.ChoiceFilter(field_name='region', choices=CertifiedCompany.objects.all().values_list('region', 'region').distinct(), label='Регион')
+    service_type = django_filters.ChoiceFilter(field_name='service_type__service', choices=Service.objects.all().values_list('service_type', 'service_type').distinct(), label='Тип услуги')
+    observer = django_filters.ChoiceFilter(field_name='observer__name', choices=Observer.objects.all().values_list('observer', 'observer').distinct(), label='Наблюдатель')
+    certificate_type = django_filters.ChoiceFilter(field_name='certificate_type', choices=CertifiedCompany.objects.all().values_list('certificate_type', 'certificate_type').distinct(), label='Статус сертификата')
 
     class Meta:
         model = CertifiedCompany
