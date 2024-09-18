@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import CertifiedCompany, Service, Observer
-from datetime import datetime, timedelta
+from django.utils import timezone
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -27,7 +27,7 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
         ]
 
     def get_time_until_expiration(self, obj):
-        now = datetime.now()
+        now = timezone.now()
         expiration_datetime = obj.expiration_date
         time_delta = expiration_datetime - now
         
