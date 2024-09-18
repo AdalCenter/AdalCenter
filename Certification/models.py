@@ -29,16 +29,16 @@ class Service(models.Model):
         verbose_name_plural = 'Сервисы'
 
 class CertifiedCompany(models.Model):
-    company_email = models.EmailField(verbose_name='Электронная почта компании')
+    company_email = models.EmailField(unique=True, verbose_name='Электронная почта компании')
     certificate_name = models.CharField(max_length=28, verbose_name='Название сертификата')
     company_photo = models.ImageField(upload_to='company_photos/', verbose_name="Фото компании (внутри или снаружи)")
-    company_name = models.CharField(max_length=255, verbose_name="Название компании")
-    trademark = models.CharField(max_length=255, verbose_name="Товарный знак")
+    company_name = models.CharField(unique=True, max_length=255, verbose_name="Название компании")
+    trademark = models.CharField(unique=True, max_length=255, verbose_name="Товарный знак")
     service_type = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name="Тип обслуживания", related_name="companies")
-    registration_number = models.CharField(max_length=100, verbose_name="Регистрационный номер")
+    registration_number = models.CharField(unique=True, max_length=100, verbose_name="Регистрационный номер")
     region = models.CharField(max_length=255, verbose_name="Область")
     observer = models.ForeignKey(Observer, on_delete=models.SET_NULL, null=True, verbose_name="Наблюдатель")
-    company_address = models.TextField(verbose_name="Адрес компании")
+    company_address = models.TextField(unique=True, verbose_name="Адрес компании")
     certificate_photo = models.ImageField(upload_to='certificate_photos/', verbose_name="Фото сертификата")
     qr_code = models.ImageField(upload_to='qr_codes/', verbose_name="QR-код", blank=True, null=True)
     issue_date = models.DateTimeField(verbose_name="Дата и время получения сертификата")
