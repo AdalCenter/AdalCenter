@@ -7,6 +7,9 @@ from rest_framework.permissions import AllowAny
 from rest_framework import exceptions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters as drf_filters
+from .filters import CertifiedCompanyFilter
 
 
 class ObserverViewSet(viewsets.ModelViewSet):
@@ -76,7 +79,6 @@ class ServiceViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Сервис не найден'}, status=status.HTTP_404_NOT_FOUND)
         return super().handle_exception(exc)
 
-
 class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
     """
     API endpoint для управления сертифицированными компаниями.
@@ -85,6 +87,10 @@ class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
     serializer_class = CertifiedCompanyListSerializer
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [AllowAny]
+    
+    filter_backends = [DjangoFilterBackend, drf_filters.SearchFilter]
+    filterset_class = CertifiedCompanyFilter
+    search_fields = ['company_name']
 
     @swagger_auto_schema(
         operation_summary="Получить список сертифицированных компаний",

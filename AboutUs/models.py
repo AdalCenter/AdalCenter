@@ -233,7 +233,7 @@ class SuggestionsOrComplaints(models.Model):
     telegram_qr_code = models.ImageField(upload_to='SuggestionsOrComplaintsTelegramQrCode/', verbose_name='Qr-код для жалоб и предложений Telegram')
     whatsapp_qr_code = models.ImageField(upload_to='SuggestionsOrComplaintsWhatsAppQrCode/', verbose_name='Qr-код для жалоб и предложений WhatsApp')
     whatsapp_url = models.URLField(verbose_name='URL для жалоб и предложений WhatsApp')
-    telegram_url = models.URLField(verbose_name='URL для жалоб и предложений WhatsApp')
+    telegram_url = models.URLField(verbose_name='URL для жалоб и предложений Telegram')
 
     def __str__(self) -> str:
         return f"WhatsApp: {self.whatsapp_url} - Telegram: {self.telegram_url}"

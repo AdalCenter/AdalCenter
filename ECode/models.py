@@ -14,7 +14,7 @@ class ECode(models.Model):
         (HARAM, 'Харам (Запрещенные)')
     ]
 
-    code = models.CharField(unique=True, max_length=13, verbose_name='Код продукта', unique=True)
+    code = models.CharField(unique=True, max_length=13, verbose_name='Код продукта')
     code_name = models.CharField(max_length=30, verbose_name='Название кода')
     code_status = models.CharField(max_length=42, choices=CODE_STATUS_CHOICES, verbose_name='Статус продукта')
     description = models.TextField(verbose_name='Описание')
