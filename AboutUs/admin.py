@@ -48,7 +48,7 @@ class BoycottAdmin(admin.ModelAdmin):
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('name', 'stars', 'text')
+    list_display = ('fullname', 'stars', 'text')
 
 @admin.register(ProcessOfObtainingCertificate)
 class ProcessOfObtainingCertificateAdmin(admin.ModelAdmin):

@@ -136,12 +136,13 @@ class Boycott(models.Model):
 
 
 class Review(models.Model):
-    name = models.CharField(max_length=18, verbose_name='Имя')
-    stars = models.CharField(max_length=1, verbose_name='Количество звезд')
+    profile_photo = models.ImageField(upload_to='ProfilePhoto/', verbose_name='Фото профиля')
+    fullname = models.CharField(max_length=26, verbose_name='Ф.И.О')
+    company_and_position_in_it = models.TextField(verbose_name='Компания и должность в ней')
     text = models.TextField(verbose_name='Содержимое отзыва')
 
     def __str__(self) -> str:
-        return self.name
+        return self.fullname
 
     class Meta:
         verbose_name = 'Отзыв'
