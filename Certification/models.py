@@ -6,12 +6,13 @@ from django.conf import settings
 
 
 class Observer(models.Model):
-    name = models.CharField(max_length=255, verbose_name="Имя")
+    fullname = models.CharField(max_length=255, verbose_name="Ф.И.О")
+    observer_profile_image = models.ImageField(upload_to='ObserverProfileImage/', verbose_name='Фото профиля наблюдателя')
     contact_number = models.CharField(max_length=50, verbose_name="Контактный номер")
     address = models.TextField(verbose_name="Адрес")
 
     def __str__(self):
-        return self.name
+        return f'{self.fullname} - {self.contact_number}'
 
     class Meta:
         verbose_name = 'Наблюдатель'
@@ -29,7 +30,7 @@ class Service(models.Model):
         verbose_name_plural = 'Сервисы'
 
 class CertifiedCompany(models.Model):
-    company_email = models.EmailField(unique=True, verbose_name='Электронная почта компании')
+    company_email = models.EmailField(verbose_name='Электронная почта компании')
     certificate_name = models.CharField(max_length=28, verbose_name='Название сертификата')
     company_photo = models.ImageField(upload_to='company_photos/', verbose_name="Фото компании (внутри или снаружи)")
     company_name = models.CharField(unique=True, max_length=255, verbose_name="Название компании")
@@ -71,3 +72,24 @@ class CertifiedCompany(models.Model):
     class Meta:
         verbose_name = 'Сертифицированная компания'
         verbose_name_plural = 'Сертифицированные компании'
+
+import os
+from django.http import HttpResponse, Http404
+from django.conf import settings
+from django.utils.encoding import smart_str
+
+def download_certificate(request, filename):
+    # Путь к директории, где хранятся файлы сертификатов
+    file_path = os.path.join(settings.MEDIA_ROOT, 'company_photos', filename)
+    
+    # Проверка, существует ли файл
+    if os.path.exists(file_path):
+        # Открываем файл для чтения в бинарном режиме
+        with open(file_path, 'rb') as file:
+            response = HttpResponse(file.read(), content_type='application/force-download')
+            # Добавляем заголовок для загрузки файла
+            response['Content-Disposition'] = f'attachment; filename={smart_str(filename)}'
+            return response
+    else:
+        # Если файл не найден, возвращаем 404 ошибку
+        raise Http404("Файл не найден")

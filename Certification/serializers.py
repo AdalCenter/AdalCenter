@@ -11,7 +11,7 @@ class ServiceSerializer(serializers.ModelSerializer):
 class ObserverSerializer(serializers.ModelSerializer):
     class Meta:
         model = Observer
-        fields = ['id', 'name', 'contact_number', 'address']
+        fields = ['id', 'fullname', 'observer_profile_image', 'contact_number', 'address']
 
 class CertifiedCompanyListSerializer(serializers.ModelSerializer):
     service_type = ServiceSerializer(read_only=True)
