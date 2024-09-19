@@ -4,8 +4,8 @@ from .models import Observer, Service, CertifiedCompany
 
 @admin.register(Observer)
 class ObserverAdmin(admin.ModelAdmin):
-    list_display = ('name', 'contact_number', 'address')
-    search_fields = ('name', 'contact_number')
+    list_display = ('fullname', 'contact_number', 'address')
+    search_fields = ('fullname', 'contact_number')
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):

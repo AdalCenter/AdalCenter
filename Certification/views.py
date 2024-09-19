@@ -114,3 +114,27 @@ class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
         if isinstance(exc, exceptions.NotFound):
             return Response({'error': 'Компания не найдена'}, status=status.HTTP_404_NOT_FOUND)
         return super().handle_exception(exc)
+
+import os
+from django.http import HttpResponse, Http404
+from django.conf import settings
+from django.utils.encoding import smart_str
+from rest_framework.decorators import api_view
+
+@api_view(['GET'])
+def download_certificate(request, filename):
+    # Путь к директории, где хранятся файлы сертификатов
+    file_path = os.path.join(settings.MEDIA_ROOT, 'company_photos', filename)
+    
+    # Проверка, существует ли файл
+    if os.path.exists(file_path):
+        # Открываем файл для чтения в бинарном режиме
+        with open(file_path, 'rb') as file:
+            response = HttpResponse(file.read(), content_type='application/force-download')
+            # Добавляем заголовок для загрузки файла
+            response['Content-Disposition'] = f'attachment; filename={smart_str(filename)}'
+            return response
+    else:
+        # Если файл не найден, возвращаем 404 ошибку
+        raise Http404("Файл не найден")
+
