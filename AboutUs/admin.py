@@ -56,7 +56,7 @@ class ProcessOfObtainingCertificateAdmin(admin.ModelAdmin):
 
 @admin.register(OurIndicators)
 class OurIndicatorsAdmin(admin.ModelAdmin):
-    list_display = ('description',)
+    list_display = ('year_of_foundation', 'number_of_domestic_enterprises', 'number_offoreign_enterprises', 'number_of_professionals')
 
 @admin.register(RatingAndHowYouHeardAboutOurSite)
 class RatingAndHowYouHeardAboutOurSiteAdmin(admin.ModelAdmin):

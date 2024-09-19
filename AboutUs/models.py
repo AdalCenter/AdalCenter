@@ -164,10 +164,13 @@ class ProcessOfObtainingCertificate(models.Model):
 
 
 class OurIndicators(models.Model):
-    description = models.TextField(verbose_name='Описание показателя')
+    year_of_foundation = models.PositiveIntegerField(verbose_name='Год основания')
+    number_of_domestic_enterprises = models.CharField(max_length=10, verbose_name='Количество отечественных предприятий')
+    number_offoreign_enterprises = models.CharField(max_length=10, verbose_name='Количество иностранных предприятий')
+    number_of_professionals = models.CharField(max_length=10, verbose_name='Количество профессионалов')
 
     def __str__(self) -> str:
-        return self.description
+        return f'Год основания: {self.year_of_foundation} - Количество отечественных предприятий: {self.number_of_domestic_enterprises} - Количество иностранных предприятий: {self.number_offoreign_enterprises} - Количество профессионалов: {self.number_of_professionals}'
 
     class Meta:
         verbose_name = 'Показатель'
