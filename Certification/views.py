@@ -10,6 +10,11 @@ from drf_yasg import openapi
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters as drf_filters
 from .filters import CertifiedCompanyFilter
+import os
+from django.http import HttpResponse, Http404
+from django.conf import settings
+from django.utils.encoding import smart_str
+from rest_framework.decorators import api_view
 
 
 class ObserverViewSet(viewsets.ModelViewSet):
@@ -115,26 +120,15 @@ class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Компания не найдена'}, status=status.HTTP_404_NOT_FOUND)
         return super().handle_exception(exc)
 
-import os
-from django.http import HttpResponse, Http404
-from django.conf import settings
-from django.utils.encoding import smart_str
-from rest_framework.decorators import api_view
-
 @api_view(['GET'])
 def download_certificate(request, filename):
-    # Путь к директории, где хранятся файлы сертификатов
-    file_path = os.path.join(settings.MEDIA_ROOT, 'company_photos', filename)
-    
-    # Проверка, существует ли файл
-    if os.path.exists(file_path):
-        # Открываем файл для чтения в бинарном режиме
+    certificate_dir = os.path.join(settings.MEDIA_ROOT, 'certificate_photos')
+    file_path = os.path.join(certificate_dir, filename)
+
+    if os.path.exists(file_path) and os.path.commonprefix([file_path, certificate_dir]) == certificate_dir:
         with open(file_path, 'rb') as file:
             response = HttpResponse(file.read(), content_type='application/force-download')
-            # Добавляем заголовок для загрузки файла
             response['Content-Disposition'] = f'attachment; filename={smart_str(filename)}'
             return response
     else:
-        # Если файл не найден, возвращаем 404 ошибку
-        raise Http404("Файл не найден")
-
+        raise Http404("Файл не найден или доступ к нему запрещен.")
