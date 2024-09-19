@@ -88,9 +88,8 @@ class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [AllowAny]
     
-    filter_backends = [DjangoFilterBackend, drf_filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend]
     filterset_class = CertifiedCompanyFilter
-    search_fields = ['company_name']
 
     @swagger_auto_schema(
         operation_summary="Получить список сертифицированных компаний",
