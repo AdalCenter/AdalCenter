@@ -2,7 +2,7 @@ from django.db import models
 
 
 class News(models.Model):
-    create_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    create_date = models.DateTimeField(verbose_name='Дата создания')
     latest_update_date = models.DateTimeField(auto_now=True, verbose_name='Дата последнего обновления')
     address = models.CharField(max_length=255, verbose_name='Адрес', default='')
     title = models.CharField(max_length=255, verbose_name='Заголовок')
