@@ -164,10 +164,10 @@ class ProcessOfObtainingCertificate(models.Model):
 
 
 class OurIndicators(models.Model):
-    year_of_foundation = models.PositiveIntegerField(verbose_name='Год основания')
-    number_of_domestic_enterprises = models.CharField(max_length=10, verbose_name='Количество отечественных предприятий')
-    number_offoreign_enterprises = models.CharField(max_length=10, verbose_name='Количество иностранных предприятий')
-    number_of_professionals = models.CharField(max_length=10, verbose_name='Количество профессионалов')
+    year_of_foundation = models.TextField(verbose_name='Год основания')
+    number_of_domestic_enterprises = models.TextField(verbose_name='Количество отечественных предприятий')
+    number_offoreign_enterprises = models.TextField(verbose_name='Количество иностранных предприятий')
+    number_of_professionals = models.TextField(verbose_name='Количество профессионалов')
 
     def __str__(self) -> str:
         return f'Год основания: {self.year_of_foundation} - Количество отечественных предприятий: {self.number_of_domestic_enterprises} - Количество иностранных предприятий: {self.number_offoreign_enterprises} - Количество профессионалов: {self.number_of_professionals}'
@@ -211,8 +211,8 @@ class MainPhoneNumber(models.Model):
 
 class OurSites(models.Model):
     icon = models.ImageField(upload_to='OurSitesIcon/', verbose_name='Иконка сайта')
-    site_name = models.CharField(max_length=18, verbose_name='Название сайта')
-    site_url = models.URLField(max_length=9, verbose_name='URL сайта')
+    site_name = models.CharField(max_length=22, verbose_name='Название сайта')
+    site_url = models.URLField(verbose_name='URL сайта')
 
     def __str__(self) -> str:
         return self.site_name
