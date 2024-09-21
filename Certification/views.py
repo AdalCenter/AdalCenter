@@ -132,14 +132,67 @@ def download_certificate(request, filename):
     else:
         raise Http404("Файл не найден или доступ к нему запрещен.")
 
+@swagger_auto_schema(
+    method='get',
+    operation_description="Получить список доступных фильтров для сертифицированных компаний. "
+                          "Этот API возвращает возможные значения для фильтрации компаний по регионам, "
+                          "типам услуг, типам сертификатов и наблюдателям.",
+    responses={
+        200: openapi.Response(
+            description="Успешный ответ с вариантами фильтров",
+            examples={
+                "application/json": {
+                    "regions": ["Ошская область", "Чуйская область"],
+                    "service_types": ["BBQ", "Type 1", "Type 2"],
+                    "certificate_types": ["Сертифицированный", "В процессе", "Истекшие"],
+                    "observer": ["Иван Иванов", "Петр Петров"]
+                }
+            }
+        )
+    },
+    manual_parameters=[
+        openapi.Parameter(
+            'detail', openapi.IN_QUERY, 
+            description="Флаг для вывода детальной информации (true/false). "
+                        "Если true, добавляется дополнительная информация о каждом фильтре.",
+            type=openapi.TYPE_BOOLEAN
+        )
+    ]
+)
 @api_view(['GET'])
 def get_filter_options(request):
+    """
+    Получить список доступных вариантов фильтров для сертифицированных компаний:
+    
+    - **regions**: регионы, в которых зарегистрированы компании.
+    - **service_types**: типы услуг, которые предоставляют компании.
+    - **certificate_types**: статусы сертификатов компаний (например, 'Сертифицированный', 'Истекшие').
+    - **observer**: список наблюдателей, ассоциированных с компаниями.
+
+    Этот эндпоинт помогает в фильтрации данных по вышеуказанным критериям.
+    """
     regions = CertifiedCompany.objects.values_list('region', flat=True).distinct()
     service_types = CertifiedCompany.objects.values_list('service_type__service', flat=True).distinct()
     certificate_types = CertifiedCompany.objects.values_list('certificate_type', flat=True).distinct()
+    observer = CertifiedCompany.objects.values_list('observer__fullname', flat=True).distinct()
+
+    if request.GET.get('detail') == 'true':
+        detailed_info = {
+            "regions_description": "Это список всех регионов, где зарегистрированы сертифицированные компании.",
+            "service_types_description": "Это возможные типы услуг, которые предоставляют сертифицированные компании.",
+            "certificate_types_description": "Это типы сертификатов, которые имеют компании, включая истекшие, активные и процесс получения."
+        }
+        return JsonResponse({
+            "regions": list(regions),
+            "service_types": list(service_types),
+            "certificate_types": list(certificate_types),
+            "observer": list(observer),
+            "details": detailed_info
+        })
 
     return JsonResponse({
         "regions": list(regions),
         "service_types": list(service_types),
-        "certificate_types": list(certificate_types)
+        "certificate_types": list(certificate_types),
+        "observer": list(observer)
     })
