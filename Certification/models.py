@@ -80,13 +80,13 @@ class CertifiedCompany(models.Model):
 
     def get_certificate_status_icon(self):
         if self.certificate_type == 'Сертифицированный':
-            return f'{settings.MEDIA_URL}/CertificateStatusIcon/Verified.png'
+            return f'https://{settings.SITE_DOMEN}{settings.MEDIA_URL}CertificateStatusIcon/Verified.png'
         elif self.certificate_type == 'В процессе':
-            return f'{settings.MEDIA_URL}/CertificateStatusIcon/In_progress.png'
+            return f'https://{settings.SITE_DOMEN}{settings.MEDIA_URL}CertificateStatusIcon/In_progress.png'
         elif self.certificate_type == 'Приостановлено':
-            return f'{settings.MEDIA_URL}/CertificateStatusIcon/Suspended.png'
+            return f'https://{settings.SITE_DOMEN}{settings.MEDIA_URL}CertificateStatusIcon/Suspended.png'
         elif self.certificate_type == 'Истекший':
-            return f'{settings.MEDIA_URL}/CertificateStatusIcon/Expired.png'
+            return f'https://{settings.SITE_DOMEN}{settings.MEDIA_URL}CertificateStatusIcon/Expired.png'
 
     def get_certificate_status_text(self):
         if self.certificate_type == 'Сертифицированный':
