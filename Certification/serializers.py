@@ -23,7 +23,7 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'company_email', 'certificate_name', 'company_photo', 'company_name', 'trademark', 'service_type', 
             'registration_number', 'region', 'observer', 'company_address', 'certificate_photo', 'qr_code', 
-            'issue_date', 'expiration_date', 'certificate_type', 'time_until_expiration', 'certificate_status_date_icon', 'certificate_status_date_text'
+            'issue_date', 'expiration_date', 'certificate_type', 'time_until_expiration'
         ]
 
     def get_time_until_expiration(self, obj):

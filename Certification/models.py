@@ -44,11 +44,9 @@ class CertifiedCompany(models.Model):
     company_address = models.TextField(unique=True, verbose_name="Адрес компании")
     certificate_photo = models.ImageField(upload_to='certificate_photos/', verbose_name="Фото сертификата")
     qr_code = models.ImageField(upload_to='qr_codes/', verbose_name="QR-код", blank=True, null=True)
-    issue_date = models.DateTimeField(verbose_name="Дата и время получения сертификата", blank=True, null=True)
-    expiration_date = models.DateTimeField(verbose_name="Дата и время окончания сертификата", blank=True, null=True)
-    certificate_type = models.CharField(max_length=50, choices=[('Сертифицированный', 'Сертифицированный'), ('В процессе', 'В процессе'), ('Приостановлено', 'Приостановлено'), ('Истекшие', 'Истекшие')], default='В процессе', verbose_name="Тип сертификата")
-    certificate_status_date_icon = models.ImageField(upload_to='CertificateStatusDateIcon/', verbose_name='Иконка для статуса сертификата')
-    certificate_status_date_text = models.TextField(verbose_name='Текст для статуса сертификата')
+    issue_date = models.DateTimeField(verbose_name="Дата и времени получения сертификата", blank=True, null=True)
+    expiration_date = models.DateTimeField(verbose_name="Дата и времени окончания сертификата", blank=True, null=True)
+    certificate_type = models.CharField(max_length=50, choices=[('Сертифицированный', 'Сертифицированный'), ('В процессе', 'В процессе'), ('Приостановлено', 'Приостановлено'), ('Истекший', 'Истекший')], default='В процессе', verbose_name="Тип сертификата")
 
     def __str__(self):
         return self.company_name
@@ -57,7 +55,7 @@ class CertifiedCompany(models.Model):
         now = timezone.now()
         if self.certificate_type != 'Приостановлено':
             if self.expiration_date and self.expiration_date < now:
-                self.certificate_type = 'Истекшие'
+                self.certificate_type = 'Истекший'
             else:
                 self.certificate_type = 'Сертифицированный'
 
@@ -65,7 +63,7 @@ class CertifiedCompany(models.Model):
         if self.certificate_type == 'В процессе':
             if self.issue_date or self.expiration_date:
                 raise ValidationError("Нельзя указывать даты получения и окончания сертификата, если тип сертификата 'В процессе'.")
-        
+
         if self.certificate_type != 'В процессе':
             if not self.issue_date or not self.expiration_date:
                 raise ValidationError("Для этого типа сертификата необходимо указать даты получения и окончания.")
@@ -79,6 +77,26 @@ class CertifiedCompany(models.Model):
         self.update_certificate_type()
         self.full_clean()
         super().save(*args, **kwargs)
+
+    def get_certificate_icon(self):
+        if self.certificate_type == 'Сертифицированный':
+            return './CertificateStatusIcon/Verified.png'
+        elif self.certificate_type == 'В процессе':
+            return './CertificateStatusIcon/In_progress.png'
+        elif self.certificate_type == 'Приостановлено':
+            return './CertificateStatusIcon/Suspended.png'
+        elif self.certificate_type == 'Истекший':
+            return './CertificateStatusIcon/Expired.png'
+
+    def get_certificate_text(self):
+        if self.certificate_type == 'Сертифицированный':
+            return 'Проверенный Сертифицировано до'
+        elif self.certificate_type == 'В процессе':
+            return 'В процессе'
+        elif self.certificate_type == 'Приостановлено':
+            return 'Приостановлено'
+        elif self.certificate_type == 'Истекший':
+            return 'Истекший'
 
     class Meta:
         verbose_name = 'Сертифицированная компания'
