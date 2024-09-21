@@ -78,7 +78,7 @@ class CertifiedCompany(models.Model):
         self.full_clean()
         super().save(*args, **kwargs)
 
-    def get_certificate_icon(self):
+    def get_certificate_status_icon(self):
         if self.certificate_type == 'Сертифицированный':
             return './CertificateStatusIcon/Verified.png'
         elif self.certificate_type == 'В процессе':
@@ -88,7 +88,7 @@ class CertifiedCompany(models.Model):
         elif self.certificate_type == 'Истекший':
             return './CertificateStatusIcon/Expired.png'
 
-    def get_certificate_text(self):
+    def get_certificate_status_text(self):
         if self.certificate_type == 'Сертифицированный':
             return 'Проверенный Сертифицировано до'
         elif self.certificate_type == 'В процессе':

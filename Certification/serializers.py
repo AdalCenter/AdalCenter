@@ -17,13 +17,15 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
     service_type = ServiceSerializer(read_only=True)
     observer = ObserverSerializer(read_only=True)
     time_until_expiration = serializers.SerializerMethodField()
+    certificate_status_icon = serializers.SerializerMethodField()
+    certificate_status_text = serializers.SerializerMethodField()
 
     class Meta:
         model = CertifiedCompany
         fields = [
             'id', 'company_email', 'certificate_name', 'company_photo', 'company_name', 'trademark', 'service_type', 
             'registration_number', 'region', 'observer', 'company_address', 'certificate_photo', 'qr_code', 
-            'issue_date', 'expiration_date', 'certificate_type', 'time_until_expiration'
+            'issue_date', 'expiration_date', 'certificate_type', 'time_until_expiration', 'certificate_status_icon', 'certificate_status_text' 
         ]
 
     def get_time_until_expiration(self, obj):
@@ -51,3 +53,9 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
             'minutes': minutes,
             'color': color
         }
+
+    def get_certificate_icon(self, obj):
+        return obj.get_certificate_status_icon()
+
+    def get_certificate_text(self, obj):
+        return obj.get_certificate_status_text()
