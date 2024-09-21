@@ -37,7 +37,7 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
             minutes, _ = divmod(remainder, 60)
         else:
             days, hours, minutes = 0, 0, 0
-        
+
         if days <= 10:
             color = 'red'
         elif days <= 30:
