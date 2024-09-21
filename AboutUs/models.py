@@ -75,14 +75,14 @@ class OurAchievement(models.Model):
 
 
 class OurAchievementCertificateImage(models.Model):
-    image = models.ImageField(upload_to='Certificates_image/', verbose_name='Фото сертификата')
+    image = models.ImageField(upload_to='Certificates_image/', verbose_name='Фото нашего сертификата')
 
     def __str__(self) -> str:
         return self.image.url
 
     class Meta:
-        verbose_name = 'Сертификат'
-        verbose_name_plural = 'Сертификаты'
+        verbose_name = 'НАш сертификат'
+        verbose_name_plural = 'Наши сертификаты'
 
 
 class OurGoalsAndObjectives(models.Model):

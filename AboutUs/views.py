@@ -324,7 +324,7 @@ class OurAchievementCertificateImageViewSet(viewsets.ModelViewSet):
     serializer_class = OurAchievementCertificateImageSerializer
 
     @swagger_auto_schema(
-        operation_summary="Получить список изображений сертификатов",
+        operation_summary="Получить список изображений наших сертификатов",
         responses={
             200: openapi.Response("Успешный ответ", OurAchievementCertificateImageSerializer(many=True)),
             404: "Изображения не найдены"
@@ -334,7 +334,7 @@ class OurAchievementCertificateImageViewSet(viewsets.ModelViewSet):
         try:
             return super().list(request, *args, **kwargs)
         except Exception:
-            return Response({'error': 'Ошибка получения изображений сертификатов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': 'Ошибка получения изображений наших сертификатов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @swagger_auto_schema(
         operation_summary="Получить изображение сертификата по ID",
@@ -347,7 +347,7 @@ class OurAchievementCertificateImageViewSet(viewsets.ModelViewSet):
         try:
             return super().retrieve(request, *args, **kwargs)
         except Exception:
-            return Response({'error': 'Ошибка получения изображения сертификата'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({'error': 'Ошибка получения изображения наших сертификата'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class ReviewViewSet(viewsets.ModelViewSet):
     """
