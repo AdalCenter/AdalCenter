@@ -54,8 +54,8 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
             'color': color
         }
 
-    def get_certificate_icon(self, obj):
+    def get_certificate_status_icon(self, obj):
         return obj.get_certificate_status_icon()
 
-    def get_certificate_text(self, obj):
+    def get_certificate_status_text(self, obj):
         return obj.get_certificate_status_text()
