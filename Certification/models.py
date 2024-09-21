@@ -45,26 +45,8 @@ class CertifiedCompany(models.Model):
     issue_date = models.DateTimeField(verbose_name="Дата и время получения сертификата")
     expiration_date = models.DateTimeField(verbose_name="Дата и время окончания сертификата")
     certificate_type = models.CharField(max_length=50, choices=[('Сертифицированный', 'Сертифицированный'), ('В процессе', 'В процессе'), ('Приостановлено', 'Приостановлено'), ('Истекшие', 'Истекшие')], default='В процессе', verbose_name="Тип сертификата")
-
-    def save(self, *args, **kwargs):
-        if not self.qr_code and self.certificate_photo:
-            download_url = f'https://{settings.SITE_DOMEN}{self.certificate_photo.url}'
-            qr = qrcode.QRCode(
-                version=1,
-                error_correction=qrcode.constants.ERROR_CORRECT_L,
-                box_size=10,
-                border=4,
-            )
-            qr.add_data(download_url)
-            qr.make(fit=True)
-            img = qr.make_image(fill='black', back_color='white')
-            buffer = BytesIO()
-            img.save(buffer, format="PNG")
-            buffer.seek(0)
-            self.qr_code.save(f'qr_{self.pk}.png', File(buffer), save=False)
-            buffer.close()
-
-        super().save(*args, **kwargs)
+    certificate_status_date_icon = models.ImageField(upload_to='CertificateStatusDateIcon/', verbose_name='Иконка для статуса сертификата')
+    certificate_status_date_text = models.TextField(verbose_name='Текст для статуса сертификата')
 
     def __str__(self):
         return self.company_name

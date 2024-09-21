@@ -8,10 +8,9 @@ from rest_framework import exceptions
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters as drf_filters
 from .filters import CertifiedCompanyFilter
 import os
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, JsonResponse
 from django.conf import settings
 from django.utils.encoding import smart_str
 from rest_framework.decorators import api_view
@@ -132,3 +131,15 @@ def download_certificate(request, filename):
             return response
     else:
         raise Http404("Файл не найден или доступ к нему запрещен.")
+
+@api_view(['GET'])
+def get_filter_options(request):
+    regions = CertifiedCompany.objects.values_list('region', flat=True).distinct()
+    service_types = CertifiedCompany.objects.values_list('service_type__service', flat=True).distinct()
+    certificate_types = CertifiedCompany.objects.values_list('certificate_type', flat=True).distinct()
+
+    return JsonResponse({
+        "regions": list(regions),
+        "service_types": list(service_types),
+        "certificate_types": list(certificate_types)
+    })
