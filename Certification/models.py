@@ -31,9 +31,6 @@ class Service(models.Model):
         verbose_name = 'Сервис'
         verbose_name_plural = 'Сервисы'
 
-from django.core.exceptions import ValidationError
-from django.utils import timezone
-
 class CertifiedCompany(models.Model):
     company_email = models.EmailField(verbose_name='Электронная почта компании')
     certificate_name = models.CharField(max_length=28, verbose_name='Название сертификата')
