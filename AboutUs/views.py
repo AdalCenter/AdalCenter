@@ -337,7 +337,7 @@ class OurAchievementCertificateImageViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Ошибка получения изображений наших сертификатов'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @swagger_auto_schema(
-        operation_summary="Получить изображение сертификата по ID",
+        operation_summary="Получить изображение нашего сертификата по ID",
         responses={
             200: openapi.Response("Успешный ответ", OurAchievementCertificateImageSerializer()),
             404: "Изображение не найдено"

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import ProductBarCode
-
+from modeltranslation.admin import TranslationAdmin
 
 @admin.register(ProductBarCode)
 class ProductBarCodeAdmin(admin.ModelAdmin):
