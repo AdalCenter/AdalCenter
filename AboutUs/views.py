@@ -44,7 +44,6 @@ class ContactViewSet(viewsets.ModelViewSet):
         except Exception:
             return Response({'error': 'Ошибка получения контакта'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class AddressViewSet(viewsets.ModelViewSet):
     """
     API для управления адресами (Футер).
@@ -77,7 +76,6 @@ class AddressViewSet(viewsets.ModelViewSet):
             return super().retrieve(request, *args, **kwargs)
         except Exception:
             return Response({'error': 'Ошибка получения адреса'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 class PartnerViewSet(viewsets.ModelViewSet):
     """
@@ -112,7 +110,6 @@ class PartnerViewSet(viewsets.ModelViewSet):
         except Exception:
             return Response({'error': 'Ошибка получения партнера'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class AboutUsViewSet(viewsets.ModelViewSet):
     """
     API для управления информацией 'О нас'.
@@ -145,7 +142,6 @@ class AboutUsViewSet(viewsets.ModelViewSet):
             return super().retrieve(request, *args, **kwargs)
         except Exception:
             return Response({'error': 'Ошибка получения информации "О нас"'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 class FAQViewSet(viewsets.ModelViewSet):
     """
@@ -180,7 +176,6 @@ class FAQViewSet(viewsets.ModelViewSet):
         except Exception:
             return Response({'error': 'Ошибка получения вопроса'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class BoycottViewSet(viewsets.ModelViewSet):
     """
     API для управления черным списком компаний.
@@ -213,7 +208,6 @@ class BoycottViewSet(viewsets.ModelViewSet):
             return super().retrieve(request, *args, **kwargs)
         except Exception:
             return Response({'error': 'Ошибка получения компании из черного списка'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 class OurAchievementViewSet(viewsets.ModelViewSet):
     """
@@ -248,7 +242,6 @@ class OurAchievementViewSet(viewsets.ModelViewSet):
         except Exception:
             return Response({'error': 'Ошибка получения достижения'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class OurGoalsAndObjectivesViewSet(viewsets.ModelViewSet):
     """
     API для управления целями и задачами.
@@ -281,7 +274,6 @@ class OurGoalsAndObjectivesViewSet(viewsets.ModelViewSet):
             return super().retrieve(request, *args, **kwargs)
         except Exception:
             return Response({'error': 'Ошибка получения цели или задачи'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 class OurTeamViewSet(viewsets.ModelViewSet):
     """
