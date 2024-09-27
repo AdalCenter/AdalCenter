@@ -14,6 +14,6 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(CertifiedCompany)
 class CertifiedCompanyAdmin(admin.ModelAdmin):
-    list_display = ('company_name', 'trademark', 'registration_number', 'region', 'certificate_type')
-    search_fields = ('company_name', 'trademark', 'registration_number')
-    list_filter = ('certificate_type', 'service_type')
+    list_display = ('company_name', 'registration_number', 'certificate_name', 'company_email', 'certificate_type', 'region')
+    search_fields = ('company_name', 'registration_number', 'certificate_name', 'company_email')
+    list_filter = ('certificate_type', 'region')
