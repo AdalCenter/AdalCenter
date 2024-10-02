@@ -15,7 +15,7 @@ class ContactViewSet(viewsets.ModelViewSet):
     """
     API для управления контактами (Футер).
     """
-    queryset = Contact.objects.all()
+    queryset = Contact.objects.all().order_by('id')
     serializer_class = ContactSerializer
 
     @swagger_auto_schema(
@@ -48,7 +48,7 @@ class AddressViewSet(viewsets.ModelViewSet):
     """
     API для управления адресами (Футер).
     """
-    queryset = Address.objects.all()
+    queryset = Address.objects.all().order_by('id')
     serializer_class = AddressSerializer
 
     @swagger_auto_schema(
@@ -81,7 +81,7 @@ class PartnerViewSet(viewsets.ModelViewSet):
     """
     API для управления партнерами.
     """
-    queryset = Partner.objects.all()
+    queryset = Partner.objects.all().order_by('id')
     serializer_class = PartnerSerializer
 
     @swagger_auto_schema(
@@ -114,7 +114,7 @@ class AboutUsViewSet(viewsets.ModelViewSet):
     """
     API для управления информацией 'О нас'.
     """
-    queryset = AboutUs.objects.all()
+    queryset = AboutUs.objects.all().order_by('id')
     serializer_class = AboutUsSerializer
 
     @swagger_auto_schema(
@@ -180,7 +180,7 @@ class BoycottViewSet(viewsets.ModelViewSet):
     """
     API для управления черным списком компаний.
     """
-    queryset = Boycott.objects.all()
+    queryset = Boycott.objects.all().order_by('id')
     serializer_class = BoycottSerializer
 
     @swagger_auto_schema(
@@ -213,7 +213,7 @@ class OurAchievementViewSet(viewsets.ModelViewSet):
     """
     API для управления достижениями.
     """
-    queryset = OurAchievement.objects.all()
+    queryset = OurAchievement.objects.all().order_by('id')
     serializer_class = OurAchievementSerializer
 
     @swagger_auto_schema(
@@ -246,7 +246,7 @@ class OurGoalsAndObjectivesViewSet(viewsets.ModelViewSet):
     """
     API для управления целями и задачами.
     """
-    queryset = OurGoalsAndObjectives.objects.all()
+    queryset = OurGoalsAndObjectives.objects.all().order_by('id')
     serializer_class = OurGoalsAndObjectivesSerializer
 
     @swagger_auto_schema(
@@ -279,7 +279,7 @@ class OurTeamViewSet(viewsets.ModelViewSet):
     """
     API для управления информацией о команде.
     """
-    queryset = OurTeam.objects.all()
+    queryset = OurTeam.objects.all().order_by('id')
     serializer_class = OurTeamSerializer
 
     @swagger_auto_schema(
@@ -312,7 +312,7 @@ class OurAchievementCertificateImageViewSet(viewsets.ModelViewSet):
     """
     API для управления изображениями сертификатов достижений.
     """
-    queryset = OurAchievementCertificateImage.objects.all()
+    queryset = OurAchievementCertificateImage.objects.all().order_by('id')
     serializer_class = OurAchievementCertificateImageSerializer
 
     @swagger_auto_schema(
@@ -345,7 +345,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     """
     API для управления изображениями сертификатов достижений.
     """
-    queryset = Review.objects.all()
+    queryset = Review.objects.all().order_by('id')
     serializer_class = ReviewSerializer
 
     @swagger_auto_schema(
@@ -457,7 +457,7 @@ class ProcessOfObtainingCertificateViewSet(viewsets.ModelViewSet):
     """
     API для управления процессом получения сертификата.
     """
-    queryset = ProcessOfObtainingCertificate.objects.all()
+    queryset = ProcessOfObtainingCertificate.objects.all().order_by('id')
     serializer_class = ProcessOfObtainingCertificateSerializer
 
     @swagger_auto_schema(
@@ -490,7 +490,7 @@ class OurIndicatorsViewSet(viewsets.ModelViewSet):
     """
     API для управления показателями.
     """
-    queryset = OurIndicators.objects.all()
+    queryset = OurIndicators.objects.all().order_by('id')
     serializer_class = OurIndicatorsSerializer
 
     @swagger_auto_schema(
@@ -523,7 +523,7 @@ class ClientViewSet(viewsets.ModelViewSet):
     """
     API для управления клиентами.
     """
-    queryset = Client.objects.all()
+    queryset = Client.objects.all().order_by('id')
     serializer_class = ClientSerializer
 
     @swagger_auto_schema(
@@ -556,7 +556,7 @@ class RatingViewSet(viewsets.ModelViewSet):
     """
     API для управления рейтингами и источниками информации о сайте.
     """
-    queryset = RatingAndHowYouHeardAboutOurSite.objects.all()
+    queryset = RatingAndHowYouHeardAboutOurSite.objects.all().order_by('id')
     serializer_class = RatingSerializer
 
     @swagger_auto_schema(
@@ -604,7 +604,7 @@ class MainPhoneNumberViewSet(viewsets.ModelViewSet):
     """
     API для управления Номером в главном меню.
     """
-    queryset = MainPhoneNumber.objects.all()
+    queryset = MainPhoneNumber.objects.all().order_by('id')
     serializer_class = MainPhoneNumberSerializer
 
     @swagger_auto_schema(
@@ -637,7 +637,7 @@ class OurSitesViewSet(viewsets.ModelViewSet):
     """
     API для управления сайтом.
     """
-    queryset = OurSites.objects.all()
+    queryset = OurSites.objects.all().order_by('id')
     serializer_class = OurSitesSerializer
 
     @swagger_auto_schema(
@@ -670,7 +670,7 @@ class SocialNetworkViewSet(viewsets.ModelViewSet):
     """
     API для управления социальной сети.
     """
-    queryset = SocialNetwork.objects.all()
+    queryset = SocialNetwork.objects.all().order_by('id')
     serializer_class = SocialNetworkSerializer
 
     @swagger_auto_schema(
@@ -703,7 +703,7 @@ class MobileAppUrlViewSet(viewsets.ModelViewSet):
     """
     API для управления ссылками на мобильное приложение.
     """
-    queryset = MobileAppUrl.objects.all()
+    queryset = MobileAppUrl.objects.all().order_by('id')
     serializer_class = MobileAppUrlSerializer
 
     @swagger_auto_schema(
@@ -736,7 +736,7 @@ class SuggestionsOrComplaintsViewSet(viewsets.ModelViewSet):
     """
     API для управления ссылками на WhatsApp и Telegram для жалоб и предложений.
     """
-    queryset = SuggestionsOrComplaints.objects.all()
+    queryset = SuggestionsOrComplaints.objects.all().order_by('id')
     serializer_class = SuggestionsOrComplaintsSerializer
 
     @swagger_auto_schema(

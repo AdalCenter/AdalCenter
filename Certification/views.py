@@ -20,7 +20,7 @@ class ObserverViewSet(viewsets.ModelViewSet):
     """
     API endpoint для управления наблюдателями.
     """
-    queryset = Observer.objects.all()
+    queryset = Observer.objects.all().order_by('id')
     serializer_class = ObserverSerializer
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [AllowAny]
@@ -54,7 +54,7 @@ class ServiceViewSet(viewsets.ModelViewSet):
     """
     API endpoint для управления сервисами.
     """
-    queryset = Service.objects.all()
+    queryset = Service.objects.all().order_by('id')
     serializer_class = ServiceSerializer
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [AllowAny]
@@ -87,7 +87,7 @@ class CertifiedCompanyListViewSet(viewsets.ModelViewSet):
     """
     API endpoint для управления сертифицированными компаниями.
     """
-    queryset = CertifiedCompany.objects.all()
+    queryset = CertifiedCompany.objects.all().order_by('id')
     serializer_class = CertifiedCompanyListSerializer
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [AllowAny]

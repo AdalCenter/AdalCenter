@@ -13,7 +13,7 @@ class ECodeViewSet(viewsets.ModelViewSet):
     """
     API для управления Е-кодами.
     """
-    queryset = ECode.objects.all()
+    queryset = ECode.objects.all().order_by('id')
     serializer_class = ECodeSerializer
     parser_classes = [MultiPartParser, FormParser]
     permission_classes = [AllowAny]

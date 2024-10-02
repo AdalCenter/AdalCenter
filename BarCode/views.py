@@ -12,7 +12,7 @@ class ProductBarCodeViewSet(viewsets.ModelViewSet):
     """
     ViewSet для работы с штрих-кодами продуктов.
     """
-    queryset = ProductBarCode.objects.all()
+    queryset = ProductBarCode.objects.all().order_by('id')
     serializer_class = ProductBarCodeSerializer
     filter_backends = (filters.DjangoFilterBackend,)
     filterset_class = ProductBarCodeFilter

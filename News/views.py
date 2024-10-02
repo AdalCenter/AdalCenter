@@ -63,7 +63,7 @@ class NewsPhotoViewSets(ModelViewSet):
     **GET /news-photos/{id}/**: Получить детальную информацию о конкретном фото новости.
     """
 
-    queryset = NewsPhoto.objects.all()
+    queryset = NewsPhoto.objects.all().order_by('id')
     serializer_class = NewsPhotoSerializer
     parser_classes = [MultiPartParser, FormParser]
 
