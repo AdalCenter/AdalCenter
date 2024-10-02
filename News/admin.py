@@ -1,6 +1,7 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 from .models import News, NewsPhoto
+from .translation import *
 
 
 class NewsPhotoInline(admin.TabularInline):

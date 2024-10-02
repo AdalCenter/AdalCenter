@@ -7,7 +7,7 @@ class ProductBarCode(models.Model):
     Модель для представления штрих-кода продукта.
     """
     code = models.CharField(unique=True, max_length=14, verbose_name='Штрих код продукта')
-    product_name = models.CharField(verbose_name='Название продукта')
+    product_name = models.TextField(verbose_name='Название продукта')
     bar_type = models.CharField(max_length=6, choices=[('EAN_13', 'EAN_13'), ('UPC-A', 'UPC-A'), ('EAN-8', 'EAN-8'), ('UPC-E', 'UPC-E')], verbose_name='Тип кода продукта')
     product_status = models.CharField(max_length=42, choices=[('Проверенный', 'Проверенный'), ('Не проверенный', 'Не проверенный')], verbose_name='Статус продукта Проверенный/Не проверенный')
     company = models.ForeignKey(CertifiedCompany, on_delete=models.CASCADE, verbose_name='Компания')

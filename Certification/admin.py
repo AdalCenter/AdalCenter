@@ -57,6 +57,21 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 from .models import CertifiedCompany, Service, Observer
+from .translation import *
+from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
+from .models import Service  # Импортируем модель
+from .translation import *  # Импортируем файл translation
+
+@admin.register(Service)
+class ServiceAdmin(TranslationAdmin):
+    list_display = ('service',)  # Укажите поля для отображения
+
+
+@admin.register(Observer)
+class ObserverAdmin(admin.ModelAdmin):
+    list_display = ('fullname', 'contact_number', 'address')
+    search_fields = ('fullname', 'contact_number', 'address')
 
 @admin.register(CertifiedCompany)
 class CertifiedCompanyAdmin(TranslationAdmin):
@@ -108,12 +123,3 @@ class CertifiedCompanyAdmin(TranslationAdmin):
     
     get_certificate_status_text.short_description = 'Certificate Status Text'
 
-@admin.register(Service)
-class ServiceAdmin(TranslationAdmin):
-    list_display = ('service',)
-    search_fields = ('service',)
-
-@admin.register(Observer)
-class ObserverAdmin(admin.ModelAdmin):
-    list_display = ('fullname', 'contact_number', 'address')
-    search_fields = ('fullname', 'contact_number', 'address')
