@@ -12,7 +12,4 @@ class ServiceTranslationOptions(TranslationOptions):
 
 @register(CertifiedCompany)
 class CertifiedCompanyTranslationOptions(TranslationOptions):
-    fields = (
-        'company_email', 'certificate_name', 'company_name', 'trademark',
-        'company_address', 'certificate_type'
-    )
+    fields = ('certificate_name', 'company_name')

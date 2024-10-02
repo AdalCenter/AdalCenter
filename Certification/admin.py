@@ -78,32 +78,32 @@ class CertifiedCompanyAdmin(TranslationAdmin):
     list_display = ('company_name', 'certificate_name', 'trademark', 'certificate_type', 'region', 'expiration_date')
     search_fields = ('company_name', 'certificate_name', 'trademark', 'region')
     list_filter = ('certificate_type', 'region', 'expiration_date')
-    readonly_fields = ('qr_code', 'issue_date', 'expiration_date')
-    fieldsets = (
-        (None, {
-            'fields': (
-                'company_name',
-                'certificate_name',
-                'trademark',
-                'service_type',
-                'region',
-                'observer',
-                'company_address',
-                'company_email',
-                'registration_number',
-                'certificate_photo',
-                'company_photo'
-            )
-        }),
-        ('Certificate Details', {
-            'fields': (
-                'issue_date',
-                'expiration_date',
-                'certificate_type',
-                'qr_code'
-            )
-        }),
-    )
+    # readonly_fields = ('qr_code', 'issue_date', 'expiration_date')
+    # fieldsets = (
+    #     (None, {
+    #         'fields': (
+    #             'company_name',
+    #             'certificate_name',
+    #             'trademark',
+    #             'service_type',
+    #             'region',
+    #             'observer',
+    #             'company_address',
+    #             'company_email',
+    #             'registration_number',
+    #             'certificate_photo',
+    #             'company_photo'
+    #         )
+    #     }),
+    #     ('Certificate Details', {
+    #         'fields': (
+    #             'issue_date',
+    #             'expiration_date',
+    #             'certificate_type',
+    #             'qr_code'
+    #         )
+    #     }),
+    # )
     
     # Add functionality to display QR code image directly in the admin interface
     def get_readonly_fields(self, request, obj=None):
