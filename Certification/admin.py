@@ -2,10 +2,6 @@ from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 from .models import CertifiedCompany, Service, Observer
 from .translation import *
-from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin
-from .models import Service
-from .translation import *
 
 
 @admin.register(Service)

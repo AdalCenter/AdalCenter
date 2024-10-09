@@ -195,3 +195,35 @@ def get_filter_options(request):
         "certificate_types": list(certificate_types),
         "observer": list(observer)
     })
+
+
+# from django.utils import translation
+
+# @api_view(['GET'])
+# def get_filter_options(request):
+#     with translation.override(request.LANGUAGE_CODE):
+#         regions = CertifiedCompany.objects.values_list('region', flat=True).distinct()
+#         service_types = CertifiedCompany.objects.values_list('service_type__service', flat=True).distinct()
+#         certificate_types = CertifiedCompany.objects.values_list('certificate_type', flat=True).distinct()
+#         observer = CertifiedCompany.objects.values_list('observer__fullname', flat=True).distinct()
+
+#         if request.GET.get('detail') == 'true':
+#             detailed_info = {
+#                 "regions_description": "Описание регионов",
+#                 "service_types_description": "Описание типов услуг",
+#                 "certificate_types_description": "Описание типов сертификатов"
+#             }
+#             return JsonResponse({
+#                 "regions": list(regions),
+#                 "service_types": list(service_types),
+#                 "certificate_types": list(certificate_types),
+#                 "observer": list(observer),
+#                 "details": detailed_info
+#             })
+
+#         return JsonResponse({
+#             "regions": list(regions),
+#             "service_types": list(service_types),
+#             "certificate_types": list(certificate_types),
+#             "observer": list(observer)
+#         })

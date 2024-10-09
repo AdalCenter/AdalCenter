@@ -29,10 +29,18 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
         ]
 
     def get_time_until_expiration(self, obj):
+        if obj.certificate_type == 'В процессе':
+            return {
+                'days': None,
+                'hours': None,
+                'minutes': None,
+                'color': 'blue'
+            }
+
         now = timezone.now()
         expiration_datetime = obj.expiration_date
         time_delta = expiration_datetime - now
-        
+
         if time_delta.total_seconds() > 0:
             days = time_delta.days
             hours, remainder = divmod(time_delta.seconds, 3600)
