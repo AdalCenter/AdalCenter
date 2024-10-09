@@ -10,7 +10,7 @@ from drf_yasg import openapi
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import CertifiedCompanyFilter
 import os
-from django.http import HttpResponse, Http404, JsonResponse
+from django.http import Http404, JsonResponse, FileResponse
 from django.conf import settings
 from django.utils.encoding import smart_str
 from rest_framework.decorators import api_view
@@ -125,10 +125,9 @@ def download_certificate(request, filename):
     file_path = os.path.join(certificate_dir, filename)
 
     if os.path.exists(file_path) and os.path.commonprefix([file_path, certificate_dir]) == certificate_dir:
-        with open(file_path, 'rb') as file:
-            response = HttpResponse(file.read(), content_type='application/force-download')
-            response['Content-Disposition'] = f'attachment; filename={smart_str(filename)}'
-            return response
+        response = FileResponse(open(file_path, 'rb'), content_type='application/octet-stream')
+        response['Content-Disposition'] = f'attachment; filename={smart_str("Certificate_AdalKg.png")}'
+        return response
     else:
         raise Http404("Файл не найден или доступ к нему запрещен.")
 

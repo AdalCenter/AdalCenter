@@ -31,7 +31,6 @@ urlpatterns = i18n_patterns(
     path('api/BarCode/', include('BarCode.urls')),
     path('api/News/', include('News.urls')),
     path('api/E-Codes/', include('ECode.urls')),
-#    prefix_default_language=False
 )
 if settings.DEBUG:
     urlpatterns +=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

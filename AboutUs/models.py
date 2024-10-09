@@ -104,6 +104,7 @@ class OurTeam(models.Model):
     image = models.ImageField(upload_to='TeamPeople_Icon/', verbose_name='Фото')
     speciality = models.TextField(verbose_name='Специализация')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
+    social_network_url = models.URLField(blank=True, null=True, verbose_name='Ссылка на соц. сеть')
 
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name or ""}'.strip()
@@ -190,7 +191,6 @@ class RatingAndHowYouHeardAboutOurSite(models.Model):
         verbose_name_plural = 'Оценки и рейтинг'
 
 class SocialNetwork(models.Model):
-    icon = models.ImageField(upload_to='SocialNetworkIcon/', verbose_name='Иконка социальной сети')
     url = models.TextField(verbose_name='Ссылка на социальную сеть')
 
     def __str__(self) -> str:
