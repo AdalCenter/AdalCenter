@@ -34,7 +34,7 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
                 'days': None,
                 'hours': None,
                 'minutes': None,
-                'color': 'blue'
+                'color': '#007A8A'
             }
 
         now = timezone.now()
@@ -48,10 +48,8 @@ class CertifiedCompanyListSerializer(serializers.ModelSerializer):
         else:
             days, hours, minutes = 0, 0, 0
 
-        if days <= 10:
+        if days <= 0:
             color = 'red'
-        elif days <= 30:
-            color = 'orange'
         else:
             color = 'green'
 

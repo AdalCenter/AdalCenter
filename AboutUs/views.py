@@ -9,6 +9,7 @@ from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
 
 
 class ContactViewSet(viewsets.ModelViewSet):
@@ -176,12 +177,16 @@ class FAQViewSet(viewsets.ModelViewSet):
         except Exception:
             return Response({'error': 'Ошибка получения вопроса'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class BoycottPageNumberPagination(PageNumberPagination):
+    page_size = 12
+
 class BoycottViewSet(viewsets.ModelViewSet):
     """
     API для управления черным списком компаний.
     """
     queryset = Boycott.objects.all().order_by('id')
     serializer_class = BoycottSerializer
+    pagination_class = BoycottPageNumberPagination
 
     @swagger_auto_schema(
         operation_summary="Получить список черного списка компаний",

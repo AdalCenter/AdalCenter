@@ -5,4 +5,4 @@ from .models import *
 class ECodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ECode
-        fields = '__all__'
+        fields = ['code', 'code_name', 'code_status', 'description']
